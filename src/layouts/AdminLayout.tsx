@@ -73,7 +73,7 @@ export default function AdminLayout() {
     })
     if (current) setOpenKeys([current.key])
   }, [location.pathname])
-
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const handleClick = (e: any) => {
     const flatMenu = menuItems.flatMap((item) => item.children || [item])
     const target = flatMenu.find((i) => i.key === e.key)
