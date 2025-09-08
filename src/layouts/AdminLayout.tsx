@@ -16,11 +16,26 @@ const menuItems = [
     label: '代理管理',
     path: '/home/agent/list', // 預設點擊父選單跳轉路徑
     children: [
-      { key: 'agent/list', label: '代理列表', path: '/home/agent/list' },
       {
         key: 'agent/commission',
         label: '分潤管理',
         path: '/home/agent/commission',
+      },
+      { key: 'agent/list', label: '代理資料', path: '/home/agent/list' },
+      {
+        key: 'agent/point',
+        label: '點數加扣點資料',
+        path: '/home/agent/point',
+      },
+      {
+        key: 'agent/changeLine',
+        label: '代理換線紀錄',
+        path: '/home/agent/changeLine',
+      },
+      {
+        key: 'agent/profitManagement',
+        label: '代理分潤管理',
+        path: '/home/agent/profitManagement',
       },
     ],
   },

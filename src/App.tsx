@@ -2,10 +2,15 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 import Login from './pages/Login'
 import { useAuthStore } from './store/auth'
-import AgentList from './pages/AgentList/AgentList'
-import AgentCommission from './pages/AgentList/AgentCommission'
 import AdminLayout from './layouts/AdminLayout'
 import Home from './pages/Home'
+// 代理管理-start
+import AgentList from './pages/AgentList/AgentList'
+import AgentCommission from './pages/AgentList/AgentCommission'
+import PointsDetail from './pages/AgentList/PointsDetail'
+import ChangeLine from './pages/AgentList/ChangeLine'
+import ProfitManagement from './pages/AgentList/ProfitManagement'
+// 代理管理-end
 
 export default function App() {
   const isLoggedIn = useAuthStore((state) => state.isLoggedIn)
@@ -14,15 +19,24 @@ export default function App() {
     <BrowserRouter>
       <Routes>
         {/* 未登入者導向登入頁 */}
-        <Route path="/" element={isLoggedIn ? <Navigate to="/home" /> : <Login />} />
+        <Route
+          path="/"
+          element={isLoggedIn ? <Navigate to="/home" /> : <Login />}
+        />
 
         {/* 登入者使用 AdminLayout 包住後台所有頁面 */}
         {isLoggedIn && (
-         <Route path="/home" element={<AdminLayout />}>
-         <Route index element={<Home />} /> {/* /home 預設頁面 */}
-         <Route path="agent/list" element={<AgentList />} />
-         <Route path="agent/commission" element={<AgentCommission />} />
-       </Route>
+          <Route path="/home" element={<AdminLayout />}>
+            <Route index element={<Home />} /> {/* /home 預設頁面 */}
+            {/* 代理管理 */}
+            <Route path="agent">
+              <Route path="commission" element={<AgentCommission />} />
+              <Route path="list" element={<AgentList />} />
+              <Route path="point" element={<PointsDetail />} />
+              <Route path="changeLine" element={<ChangeLine />} />
+              <Route path="profitManagement" element={<ProfitManagement />} />
+            </Route>
+          </Route>
         )}
       </Routes>
     </BrowserRouter>
