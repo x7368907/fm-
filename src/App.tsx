@@ -2,6 +2,7 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 import Login from './pages/Login'
 import { useAuthStore } from './store/auth'
+import { useEffect } from 'react'
 import AdminLayout from './layouts/AdminLayout'
 import Home from './pages/Home'
 // 代理管理-start
@@ -14,21 +15,23 @@ import ProfitManagement from './pages/AgentList/ProfitManagement'
 
 export default function App() {
   const isLoggedIn = useAuthStore((state) => state.isLoggedIn)
+  const initializeAuth = useAuthStore((state) => state.initializeAuth)
+
+  useEffect(() => {
+    initializeAuth()
+  }, [])
 
   return (
     <BrowserRouter>
       <Routes>
-        {/* 未登入者導向登入頁 */}
         <Route
           path="/"
           element={isLoggedIn ? <Navigate to="/home" /> : <Login />}
         />
 
-        {/* 登入者使用 AdminLayout 包住後台所有頁面 */}
         {isLoggedIn && (
           <Route path="/home" element={<AdminLayout />}>
-            <Route index element={<Home />} /> {/* /home 預設頁面 */}
-            {/* 代理管理 */}
+            <Route index element={<Home />} />
             <Route path="agent">
               <Route path="commission" element={<AgentCommission />} />
               <Route path="list" element={<AgentList />} />

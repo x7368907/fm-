@@ -18,3 +18,8 @@ ol {
   margin: 0;
   padding: 0;
 }
+.ant-layout-header {
+  line-height: normal !important;
+  display: flex;
+  align-items: center;
+}

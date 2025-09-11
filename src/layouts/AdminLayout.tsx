@@ -88,11 +88,11 @@ export default function AdminLayout() {
     })
     if (current) setOpenKeys([current.key])
   }, [location.pathname])
+
   const handleClick = (e: any) => {
     const flatMenu = menuItems.flatMap((item) => item.children || [item])
     const target = flatMenu.find((i) => i.key === e.key)
 
-    // 如果是點到父層選單，直接導航到它的 path（預設第一個子選單）
     if (!target) {
       const parent = menuItems.find((item) => item.key === e.key)
       if (parent?.path) navigate(parent.path)
@@ -103,36 +103,70 @@ export default function AdminLayout() {
 
   return (
     <Layout style={{ minHeight: '100vh' }}>
-      <Sider width={200} theme="light">
-        <Menu
-          mode="inline"
-          selectedKeys={getSelectedKeys()}
-          openKeys={openKeys}
-          onOpenChange={(keys) => setOpenKeys(keys)}
-          onClick={handleClick}
-          style={{ height: '100%', borderRight: 0 }}
-        >
-          {menuItems.map((item) =>
-            item.children ? (
-              <Menu.SubMenu key={item.key} title={item.label}>
-                {item.children.map((child) => (
-                  <Menu.Item key={child.key}>{child.label}</Menu.Item>
-                ))}
-              </Menu.SubMenu>
-            ) : (
-              <Menu.Item key={item.key}>{item.label}</Menu.Item>
+      {/* Header 改在這邊！ */}
+      <Header
+        style={{
+          background: '#e2e2e2',
+          padding: '0 24px',
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+          height: 70,
+        }}
+      >
+        <Title level={4} style={{ margin: 0 }}>
+          FM後台管理系統
+        </Title>
+
+        <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+          {['會員驗證通知', '週返水', '日返水', '拋售審核', '儲值審核'].map(
+            (label) => (
+              <div
+                key={label}
+                className="border border-[#999] bg-white px-2 py-1 text-center"
+              >
+                {label}
+                <br />
+                (0)
+              </div>
             )
           )}
-        </Menu>
-      </Sider>
+          <button className="cursor-pointer border border-[#999] bg-white px-2 py-3 text-center">
+            <span>瀏覽前台</span>
+          </button>
+          <button className="cursor-pointer border border-[#999] bg-white px-2 py-3 text-center">
+            登出
+          </button>
+          <strong style={{ marginLeft: 12 }}>Hi Luca！</strong>
+        </div>
+      </Header>
 
+      {/* 下層 Layout 包含左側選單與主內容 */}
       <Layout>
-        <Header style={{ background: '#fff', padding: '0 24px' }}>
-          <Title level={4} style={{ margin: 0 }}>
-            FM後台管理系統
-          </Title>
-        </Header>
-        <Content style={{ margin: '16px' }}>
+        <Sider width={200} theme="light">
+          <Menu
+            mode="inline"
+            selectedKeys={getSelectedKeys()}
+            openKeys={openKeys}
+            onOpenChange={(keys) => setOpenKeys(keys)}
+            onClick={handleClick}
+            style={{ height: '100%', borderRight: 0 }}
+          >
+            {menuItems.map((item) =>
+              item.children ? (
+                <Menu.SubMenu key={item.key} title={item.label}>
+                  {item.children.map((child) => (
+                    <Menu.Item key={child.key}>{child.label}</Menu.Item>
+                  ))}
+                </Menu.SubMenu>
+              ) : (
+                <Menu.Item key={item.key}>{item.label}</Menu.Item>
+              )
+            )}
+          </Menu>
+        </Sider>
+
+        <Content style={{ margin: '16px', padding: '24px' }}>
           <Outlet />
         </Content>
       </Layout>
