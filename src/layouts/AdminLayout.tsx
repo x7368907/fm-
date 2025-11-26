@@ -1,7 +1,7 @@
 import { Layout, Menu, Typography } from 'antd'
 import { Outlet, useNavigate, useLocation } from 'react-router-dom'
 import { useEffect, useState } from 'react'
-
+import { useAuthStore } from '../store/auth'
 const { Header, Sider, Content } = Layout
 const { Title } = Typography
 
@@ -43,6 +43,29 @@ const menuItems = [
     key: 'member',
     label: '會員管理',
     path: '/home/member',
+    children: [
+      {
+        key: 'agent/commission',
+        label: '分潤管理',
+        path: '/home/agent/commission',
+      },
+      { key: 'agent/list', label: '代理資料', path: '/home/agent/list' },
+      {
+        key: 'agent/point',
+        label: '點數加扣點資料',
+        path: '/home/agent/point',
+      },
+      {
+        key: 'agent/changeLine',
+        label: '代理換線紀錄',
+        path: '/home/agent/changeLine',
+      },
+      {
+        key: 'agent/profitManagement',
+        label: '代理分潤管理',
+        path: '/home/agent/profitManagement',
+      },
+    ],
   },
   {
     key: 'ops',
@@ -67,10 +90,14 @@ const menuItems = [
 ]
 
 export default function AdminLayout() {
+  const { setLogoutUser } = useAuthStore()
   const navigate = useNavigate()
   const location = useLocation()
   const [openKeys, setOpenKeys] = useState<string[]>([])
-
+  const handleLogout = () => {
+    setLogoutUser()
+    navigate('/')
+  }
   const getSelectedKeys = () => {
     const path = location.pathname
     const match = menuItems
@@ -102,23 +129,14 @@ export default function AdminLayout() {
   }
 
   return (
-    <Layout style={{ minHeight: '100vh' }}>
+    <Layout className="min-h-[100vh]">
       {/* Header 改在這邊！ */}
-      <Header
-        style={{
-          background: '#e2e2e2',
-          padding: '0 24px',
-          display: 'flex',
-          justifyContent: 'space-between',
-          alignItems: 'center',
-          height: 70,
-        }}
-      >
-        <Title level={4} style={{ margin: 0 }}>
+      <Header className="flex h-[70px] items-center justify-between bg-[#e2e2e2] px-6">
+        <Title level={4} className="mt-2">
           FM後台管理系統
         </Title>
 
-        <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+        <div className="flex items-center gap-2">
           {['會員驗證通知', '週返水', '日返水', '拋售審核', '儲值審核'].map(
             (label) => (
               <div
@@ -134,10 +152,13 @@ export default function AdminLayout() {
           <button className="cursor-pointer border border-[#999] bg-white px-2 py-3 text-center">
             <span>瀏覽前台</span>
           </button>
-          <button className="cursor-pointer border border-[#999] bg-white px-2 py-3 text-center">
+          <button
+            onClick={handleLogout}
+            className="cursor-pointer border border-[#999] bg-white px-2 py-3 text-center"
+          >
             登出
           </button>
-          <strong style={{ marginLeft: 12 }}>Hi Luca！</strong>
+          <strong className="ml-3">Hi Luca！</strong>
         </div>
       </Header>
 
@@ -150,7 +171,7 @@ export default function AdminLayout() {
             openKeys={openKeys}
             onOpenChange={(keys) => setOpenKeys(keys)}
             onClick={handleClick}
-            style={{ height: '100%', borderRight: 0 }}
+            className="h-full border-r-0"
           >
             {menuItems.map((item) =>
               item.children ? (
@@ -166,7 +187,7 @@ export default function AdminLayout() {
           </Menu>
         </Sider>
 
-        <Content style={{ margin: '16px', padding: '24px' }}>
+        <Content>
           <Outlet />
         </Content>
       </Layout>
