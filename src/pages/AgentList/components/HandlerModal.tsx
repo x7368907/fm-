@@ -1,4 +1,3 @@
-import React from 'react'
 import { Modal, Table, Tag } from 'antd'
 import type { ColumnsType } from 'antd/es/table'
 
