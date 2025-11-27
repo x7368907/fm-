@@ -1,5 +1,5 @@
 // 新增/編輯分潤表單元件
-import React, { useEffect } from 'react'
+import { useEffect } from 'react'
 import { Button, Select, Input, Form, InputNumber } from 'antd'
 import { SaveOutlined, CloseOutlined } from '@ant-design/icons'
 
