@@ -175,7 +175,6 @@ export default function PointsCreate({
           onFinish={handleFinish}
           initialValues={{
             actionType: 'add',
-            rewardType: 'gift',
           }}
         >
           {/* 1. 加點/扣點 */}
@@ -336,11 +335,14 @@ export default function PointsCreate({
 
           <Form.Item label="獎勵類型" name="rewardType">
             <Select style={{ width: 200 }} placeholder="請選擇">
-              <Option value="gift">贈點</Option>
-              <Option value="manual">手動補點</Option>
+              <Option value="manual_add">加點</Option>
+              <Option value="reward_add">獎勵點數發放</Option>
+              <Option value="credit_add">信用點數上分</Option>
+              <Option value="manual_deduct">扣點</Option>
+              <Option value="reward_deduct">獎勵點數收回</Option>
+              <Option value="credit_deduct">信用點數收回</Option>
             </Select>
           </Form.Item>
-
           <Form.Item
             label="點數"
             name="points"

@@ -1,0 +1,36 @@
+import type { DataType } from './types'
+
+export const initialData: DataType[] = [
+  {
+    key: '1',
+    agentLevel: '1 / 5 (8)',
+    agentName: 'FMCA',
+    memberCount: 58,
+    agentInfo: { account: '0976061431', name: '王大衛' },
+    accountStatus: '啟用',
+    profitMode: '佔成制',
+    settlementCycle: '月結',
+    cycleDate: '2025/05/01 - 2025/05/31',
+    betAmount: 50000,
+    lossAmount: 50000,
+    agentProfit: 45000,
+    note: '',
+    reviewStatus: '待審核',
+  },
+  {
+    key: '2',
+    agentLevel: '1 / 8 (3)',
+    agentName: 'test1234',
+    memberCount: 9,
+    agentInfo: { account: '0976061431', name: '王大衛' },
+    accountStatus: '啟用',
+    profitMode: '反水制',
+    settlementCycle: '週結',
+    cycleDate: '2025/05/05 - 2025/05/11',
+    betAmount: 20000,
+    lossAmount: 20000,
+    agentProfit: 14000,
+    note: '',
+    reviewStatus: '待審核',
+  },
+]

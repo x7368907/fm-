@@ -1,0 +1,107 @@
+import { useState } from 'react'
+import { Breadcrumb, ConfigProvider, Card, Input, Select } from 'antd'
+
+// 1. 引入共用元件
+import SearchPanel, { type SearchField } from '../../../components/SearchPanel'
+import QuickRangePicker from '../../../components/QuickRangePicker'
+
+import ChangeLineCreate from './form/ChangeLineCreate'
+import HandlerModal from '../components/HandlerModal'
+import ChangeLineTable from './components/ChangeLineTable'
+
+import { useHandlerLogs } from './hooks/useHandlerLogs'
+
+const theme = { token: { colorPrimary: '#14b8a6' } }
+
+export default function ChangeLine() {
+  const [view, setView] = useState<'list' | 'create'>('list')
+  const { logs, open, setOpen, fetchLogs } = useHandlerLogs()
+
+  // 2. 定義搜尋欄位 (依照原本的 span 比例配置)
+  // 原本總寬度 24 = 4 + 5 + 10 + 3 + (2 按鈕)
+  const searchFields: SearchField[] = [
+    {
+      label: '來源代理級別',
+      name: 'sourceLevel',
+      // 原本 span={4}
+      colProps: { xs: 24, sm: 12, md: 5 },
+      render: () => (
+        <Select placeholder="請選擇代理級別" allowClear>
+          <Select.Option value="1">1級總代理</Select.Option>
+          <Select.Option value="2">2級代理</Select.Option>
+          <Select.Option value="3">3級代理</Select.Option>
+          <Select.Option value="4">4級代理</Select.Option>
+          <Select.Option value="5">5級代理</Select.Option>
+          <Select.Option value="6">6級代理</Select.Option>
+          <Select.Option value="7">7級代理</Select.Option>
+        </Select>
+      ),
+    },
+    {
+      label: '來源代理名稱',
+      name: 'sourceAgentName',
+      colProps: { xs: 24, sm: 12, md: 5 },
+      render: () => <Input placeholder="請輸入" />,
+    },
+    {
+      label: '換線日期',
+      name: 'changeDate',
+      colProps: { xs: 24, sm: 24, md: 8 },
+      render: () => <QuickRangePicker />,
+    },
+    {
+      label: '每頁顯示筆數',
+      name: 'pageSize',
+      colProps: { xs: 24, sm: 12, md: 3 },
+      render: () => (
+        <Select>
+          <Select.Option value="20">20</Select.Option>
+          <Select.Option value="50">50</Select.Option>
+        </Select>
+      ),
+    },
+  ]
+
+  // 設定預設值 (例如每頁筆數預設 20)
+  const initialValues = {
+    pageSize: '20',
+  }
+
+  return (
+    <ConfigProvider theme={theme}>
+      <div className="min-h-screen bg-gray-50 p-4">
+        <Breadcrumb separator=">" className="mb-4">
+          <Breadcrumb.Item>營運商管理</Breadcrumb.Item>
+          <Breadcrumb.Item>代理換線紀錄</Breadcrumb.Item>
+        </Breadcrumb>
+
+        {view === 'create' ? (
+          <ChangeLineCreate
+            onCancel={() => setView('list')}
+            onSave={() => setView('list')}
+          />
+        ) : (
+          <>
+            {/* 3. 使用共用 SearchPanel */}
+            <SearchPanel
+              fields={searchFields}
+              initialValues={initialValues}
+              onCreate={() => setView('create')} // 顯示新增按鈕
+              onSearch={fetchLogs} // 顯示搜尋按鈕並綁定事件
+            />
+
+            <Card className="shadow-sm">
+              <ChangeLineTable onLogs={fetchLogs} />
+            </Card>
+
+            <HandlerModal
+              open={open}
+              onCancel={() => setOpen(false)}
+              logs={logs}
+            />
+          </>
+        )}
+      </div>
+    </ConfigProvider>
+  )
+}

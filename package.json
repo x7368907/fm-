@@ -13,6 +13,7 @@
     "@antv/g2plot": "^2.4.33",
     "antd": "^5.27.2",
     "axios": "^1.11.0",
+    "ckeditor4-react": "^5.2.1",
     "moment": "^2.30.1",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",

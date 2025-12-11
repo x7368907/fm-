@@ -45,25 +45,49 @@ const menuItems = [
     path: '/home/member',
     children: [
       {
-        key: 'agent/commission',
-        label: '分潤管理',
-        path: '/home/agent/commission',
-      },
-      { key: 'agent/list', label: '代理資料', path: '/home/agent/list' },
-      {
-        key: 'agent/point',
-        label: '點數加扣點資料',
-        path: '/home/agent/point',
+        key: 'member/detail',
+        label: '會員資料',
+        path: '/home/member/detail',
       },
       {
-        key: 'agent/changeLine',
-        label: '代理換線紀錄',
-        path: '/home/agent/changeLine',
+        key: 'agent/bankCard',
+        label: '會員銀行卡',
+        path: '/home/member/bankCard',
       },
       {
-        key: 'agent/profitManagement',
-        label: '代理分潤管理',
-        path: '/home/agent/profitManagement',
+        key: 'member/discount',
+        label: '會員優惠申請',
+        path: '/home/member/discount',
+      },
+      {
+        key: 'member/returnWater',
+        label: '會員返水申請',
+        path: '/home/member/returnWater',
+      },
+      {
+        key: 'member/privilege',
+        label: '會員特權管理',
+        path: '/home/member/privilege',
+      },
+      {
+        key: 'member/login',
+        label: '會員登入管理',
+        path: '/home/member/login',
+      },
+      {
+        key: 'member/changeLine',
+        label: '會員換線管理',
+        path: '/home/member/changeLine',
+      },
+      {
+        key: 'member/changeAgent',
+        label: '會員轉代理管理',
+        path: '/home/member/changeAgent',
+      },
+      {
+        key: 'member/walletRecord',
+        label: '會員錢包紀錄',
+        path: '/home/member/walletRecord',
       },
     ],
   },
@@ -71,11 +95,70 @@ const menuItems = [
     key: 'ops',
     label: '營運管理',
     path: '/home/ops',
+    children: [
+      {
+        key: 'ops/privilege',
+        label: '特權管理',
+        path: '/home/operations/privilege',
+      },
+      {
+        key: 'ops/discount',
+        label: '優惠管理',
+        path: '/home/operations/discount',
+      },
+      {
+        key: 'ops/announce',
+        label: '公告管理',
+        path: '/home/operations/announce',
+      },
+    ],
   },
   {
-    key: 'finance',
+    key: 'financial',
     label: '財務管理',
-    path: '/home/finance',
+    path: '/home/financial',
+    children: [
+      {
+        key: 'financial/integrate',
+        label: '整合報表',
+        path: '/home/financial/integrate',
+      },
+      {
+        key: 'financial/flow',
+        label: '金流串接管理',
+        path: '/home/financial/flow',
+      },
+      {
+        key: 'financial/group',
+        label: '金流群組管理',
+        path: '/home/financial/group',
+      },
+      {
+        key: 'financial/stored',
+        label: '儲值申請管理',
+        path: '/home/financial/stored',
+      },
+      {
+        key: 'financial/consignment',
+        label: '託售申請管理',
+        path: '/home/financial/consignment',
+      },
+      {
+        key: 'financial/gameSubmissionSettings',
+        label: '遊戲上繳設定',
+        path: '/home/financial/gameSubmissionSettings',
+      },
+      {
+        key: 'financial/gameSubmissionManagement',
+        label: '遊戲上繳管理',
+        path: '/home/financial/gameSubmissionManagement',
+      },
+      {
+        key: 'financial/transactionStatisticsRecord',
+        label: '交易統計紀錄',
+        path: '/home/financial/transactionStatisticsRecord',
+      },
+    ],
   },
   {
     key: 'game',

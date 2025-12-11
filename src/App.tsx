@@ -6,13 +6,38 @@ import { useEffect } from 'react'
 import AdminLayout from './layouts/AdminLayout'
 import Home from './pages/Home'
 // 代理管理-start
-import AgentList from './pages/AgentList/AgentList'
-import AgentCommission from './pages/AgentList/AgentCommission'
-import PointsDetail from './pages/AgentList/PointsDetail'
-import ChangeLine from './pages/AgentList/ChangeLine'
-import ProfitManagement from './pages/AgentList/ProfitManagement'
+import AgentList from './pages/AgentList/AgentList/AgentList'
+import AgentCommission from './pages/AgentList/AgentCommission/AgentCommission'
+import PointsDetail from './pages/AgentList/PointsDetail/PointsDetail'
+import ChangeLine from './pages/AgentList/ChangeLine/ChangeLine'
+import ProfitManagement from './pages/AgentList/ProfitManagement/ProfitManagement'
 // 代理管理-end
-
+// 會員管理-start
+// import MemberDetail from './pages/member/Detail'
+// import MemberBankCard from './pages/member/BankCard'
+// import MemberDiscount from './pages/member/Discount'
+// import MemberReturnWater from './pages/member/ReturnWater'
+// import MemberPrivilege from './pages/member/Privilege'
+// import MemberLogin from './pages/member/Login'
+// import MemberChangeLine from './pages/member/ChangeLine'
+// import MemberChangeAgent from './pages/member/ChangeAgent'
+// import MemberWalletRecord from './pages/member/WalletRecord'
+// 會員管理-end
+// 特權管理-start
+// import DiscountManagement from './pages/operations/DiscountManagement'
+// import PrivilegeManagement from './pages/operations/PrivilegeManagement'
+// import AnnouncementManagement from './pages/operations/AnnouncementManagement/AnnouncementManagement'
+// 特權管理-end
+// 財務管理-start
+// import ConsignmentManagement from './pages/financial/ConsignmentManagement'
+// import GameSubmissionManagement from './pages/financial/GameSubmissionManagement'
+// import GameSubmissionSettings from './pages/financial/GameSubmissionSettings'
+// import IntegratedReporting from './pages/financial/Integrated/IntegratedReporting'
+// import FlowManagement from './pages/financial/PaymentFlowManagement'
+// import GroupManagement from './pages/financial/PaymentGroupManagement'
+// import StoredManagement from './pages/financial/StoredManagement'
+// import TransactionStatisticsRecord from './pages/financial/TransactionStatisticsRecord'
+// 財務管理-end
 export default function App() {
   const isLoggedIn = useAuthStore((state) => state.isLoggedIn)
   const initializeAuth = useAuthStore((state) => state.initializeAuth)
@@ -39,6 +64,41 @@ export default function App() {
               <Route path="changeLine" element={<ChangeLine />} />
               <Route path="profitManagement" element={<ProfitManagement />} />
             </Route>
+            {/* <Route path="member">
+              <Route path="detail" element={<MemberDetail />} />
+              <Route path="bankCard" element={<MemberBankCard />} />
+              <Route path="discount" element={<MemberDiscount />} />
+              <Route path="returnWater" element={<MemberReturnWater />} />
+              <Route path="privilege" element={<MemberPrivilege />} />
+              <Route path="login" element={<MemberLogin />} />
+              <Route path="changeLine" element={<MemberChangeLine />} />
+              <Route path="changeAgent" element={<MemberChangeAgent />} />
+              <Route path="walletRecord" element={<MemberWalletRecord />} />
+            </Route> */}
+            {/* <Route path="operations">
+              <Route path="discount" element={<DiscountManagement />} />
+              <Route path="privilege" element={<PrivilegeManagement />} />
+              <Route path="announce" element={<AnnouncementManagement />} />
+            </Route> */}
+            {/* <Route path="financial">
+              <Route path="integrate" element={<IntegratedReporting />} />
+              <Route path="consignment" element={<ConsignmentManagement />} />
+              <Route
+                path="gameSubmissionManagement"
+                element={<GameSubmissionManagement />}
+              />
+              <Route
+                path="gameSubmissionSettings"
+                element={<GameSubmissionSettings />}
+              />
+              <Route path="flow" element={<FlowManagement />} />
+              <Route path="group" element={<GroupManagement />} />
+              <Route path="stored" element={<StoredManagement />} />
+              <Route
+                path="transactionStatisticsRecord"
+                element={<TransactionStatisticsRecord />}
+              />
+            </Route> */}
           </Route>
         )}
       </Routes>
