@@ -26,15 +26,20 @@ export default function ChangeLine() {
       // 原本 span={4}
       colProps: { xs: 24, sm: 12, md: 5 },
       render: () => (
-        <Select placeholder="請選擇代理級別" allowClear>
-          <Select.Option value="1">1級總代理</Select.Option>
-          <Select.Option value="2">2級代理</Select.Option>
-          <Select.Option value="3">3級代理</Select.Option>
-          <Select.Option value="4">4級代理</Select.Option>
-          <Select.Option value="5">5級代理</Select.Option>
-          <Select.Option value="6">6級代理</Select.Option>
-          <Select.Option value="7">7級代理</Select.Option>
-        </Select>
+        <Select
+          placeholder="請選擇代理級別"
+          allowClear
+          options={[
+            { label: '全部', value: 'all' }, // 若是用於搜尋，建議加上此項
+            { label: '1級總代理', value: 'lvl1' },
+            { label: '2級代理', value: 'lvl2' },
+            { label: '3級代理', value: 'lvl3' },
+            { label: '4級代理', value: 'lvl4' },
+            { label: '5級代理', value: 'lvl5' },
+            { label: '6級代理', value: 'lvl6' },
+            { label: '7級代理', value: 'lvl7' },
+          ]}
+        />
       ),
     },
     {

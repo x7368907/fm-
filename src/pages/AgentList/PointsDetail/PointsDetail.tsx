@@ -35,12 +35,17 @@ export default function PointsDetail() {
       name: 'rewardType',
       colProps: { xs: 24, sm: 12, md: 4 },
       render: () => (
-        <Select placeholder="請選擇" allowClear>
-          <Select.Option value="reward_add">獎勵點數發放</Select.Option>
-          <Select.Option value="credit_add">信用點數上分</Select.Option>
-          <Select.Option value="reward_deduct">獎勵點數收回</Select.Option>
-          <Select.Option value="credit_deduct">信用點數收回</Select.Option>
-        </Select>
+        <Select
+          placeholder="請選擇"
+          allowClear
+          options={[
+            { label: '全部', value: 'all' },
+            { label: '獎勵點數發放', value: 'reward_add' },
+            { label: '信用點數上分', value: 'credit_add' },
+            { label: '獎勵點數收回', value: 'reward_deduct' },
+            { label: '信用點數收回', value: 'credit_deduct' },
+          ]}
+        />
       ),
     },
     {
@@ -48,15 +53,20 @@ export default function PointsDetail() {
       name: 'agentLevel',
       colProps: { xs: 24, sm: 12, md: 4 },
       render: () => (
-        <Select placeholder="請選擇代理級別" allowClear>
-          <Select.Option value="lvl1">1級總代理</Select.Option>
-          <Select.Option value="lvl2">2級代理</Select.Option>
-          <Select.Option value="lvl3">3級代理</Select.Option>
-          <Select.Option value="lvl4">4級代理</Select.Option>
-          <Select.Option value="lvl5">5級代理</Select.Option>
-          <Select.Option value="lvl6">6級代理</Select.Option>
-          <Select.Option value="lvl7">7級代理</Select.Option>
-        </Select>
+        <Select
+          placeholder="請選擇代理級別"
+          allowClear
+          options={[
+            { label: '全部', value: 'all' },
+            { label: '1級總代理', value: 'lvl1' },
+            { label: '2級代理', value: 'lvl2' },
+            { label: '3級代理', value: 'lvl3' },
+            { label: '4級代理', value: 'lvl4' },
+            { label: '5級代理', value: 'lvl5' },
+            { label: '6級代理', value: 'lvl6' },
+            { label: '7級代理', value: 'lvl7' },
+          ]}
+        />
       ),
     },
     {

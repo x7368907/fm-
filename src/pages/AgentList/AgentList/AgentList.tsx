@@ -37,15 +37,20 @@ export default function AgentList() {
       name: 'level',
       colProps: { xs: 24, sm: 12, md: 8, lg: 4 },
       render: () => (
-        <Select placeholder="請選擇代理級別" allowClear>
-          <Select.Option value="lvl1">1級總代理</Select.Option>
-          <Select.Option value="lvl2">2級代理</Select.Option>
-          <Select.Option value="lvl3">3級代理</Select.Option>
-          <Select.Option value="lvl4">4級代理</Select.Option>
-          <Select.Option value="lvl5">5級代理</Select.Option>
-          <Select.Option value="lvl6">6級代理</Select.Option>
-          <Select.Option value="lvl7">7級代理</Select.Option>
-        </Select>
+        <Select
+          placeholder="請選擇代理級別"
+          allowClear
+          options={[
+            { label: '全部', value: 'all' },
+            { label: '1級總代理', value: 'lvl1' },
+            { label: '2級代理', value: 'lvl2' },
+            { label: '3級代理', value: 'lvl3' },
+            { label: '4級代理', value: 'lvl4' },
+            { label: '5級代理', value: 'lvl5' },
+            { label: '6級代理', value: 'lvl6' },
+            { label: '7級代理', value: 'lvl7' },
+          ]}
+        />
       ),
     },
     {
@@ -71,27 +76,36 @@ export default function AgentList() {
       name: 'status',
       colProps: { xs: 24, sm: 12, md: 8, lg: 4 },
       render: () => (
-        <Select placeholder="請選擇" allowClear>
-          <Select.Option value={1}>啟用</Select.Option>
-          <Select.Option value={0}>停用</Select.Option>
-          <Select.Option value={2}>啟用(凍結錢包)</Select.Option>
-          <Select.Option value={3}>啟用(停用儲值)</Select.Option>
-          <Select.Option value={4}>啟用(停用託售)</Select.Option>
-          <Select.Option value={5}>終身停權</Select.Option>
-        </Select>
+        <Select
+          placeholder="請選擇"
+          allowClear
+          options={[
+            { label: '全部', value: 'all' },
+            { label: '啟用', value: 1 },
+            { label: '停用', value: 0 },
+            { label: '啟用(凍結錢包)', value: 2 },
+            { label: '啟用(停用儲值)', value: 3 },
+            { label: '啟用(停用託售)', value: 4 },
+            { label: '終身停權', value: 5 },
+          ]}
+        />
       ),
     },
     {
       label: '金流群組',
       name: 'cashGroup',
-      colProps: { xs: 24, sm: 12, md: 8, lg: 4 }, // 這是第一列最後一個
+      colProps: { xs: 24, sm: 12, md: 8, lg: 4 },
       render: () => (
-        <Select placeholder="請選擇" allowClear>
-          <Select.Option value={1}>常規會員</Select.Option>
-          <Select.Option value={2}>老會員</Select.Option>
-          <Select.Option value={3}>信用代理</Select.Option>
-          <Select.Option value={4}>USDT通道</Select.Option>
-        </Select>
+        <Select
+          placeholder="請選擇"
+          options={[
+            { label: '全部', value: 'all' },
+            { label: '常規會員', value: 1 },
+            { label: '老會員', value: 2 },
+            { label: '信用代理', value: 3 },
+            { label: 'USDT通道', value: 4 },
+          ]}
+        />
       ),
     },
 
