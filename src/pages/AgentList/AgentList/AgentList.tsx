@@ -31,7 +31,6 @@ export default function AgentList() {
 
   // 2. 定義搜尋欄位
   const searchFields: SearchField[] = [
-    // --- 第一列 (共6個，設為 lg:4 剛好佔滿一行 24 格) ---
     {
       label: '代理級別',
       name: 'level',
@@ -109,7 +108,6 @@ export default function AgentList() {
       ),
     },
 
-    // --- 第二列 (自動換行) ---
     {
       label: '註冊時間', // 你的需求：往下移，放在第一個
       name: 'regDate',
@@ -129,17 +127,6 @@ export default function AgentList() {
       render: () => (
         <Select placeholder="全部" allowClear>
           <Select.Option value="all">全部</Select.Option>
-        </Select>
-      ),
-    },
-    {
-      label: '每頁筆數',
-      name: 'pageSize',
-      colProps: { xs: 24, sm: 12, md: 8, lg: 3 },
-      render: () => (
-        <Select>
-          <Select.Option value="20">20</Select.Option>
-          <Select.Option value="50">50</Select.Option>
         </Select>
       ),
     },

@@ -54,23 +54,10 @@ export default function ChangeLine() {
       colProps: { xs: 24, sm: 24, md: 8 },
       render: () => <QuickRangePicker />,
     },
-    {
-      label: '每頁顯示筆數',
-      name: 'pageSize',
-      colProps: { xs: 24, sm: 12, md: 3 },
-      render: () => (
-        <Select>
-          <Select.Option value="20">20</Select.Option>
-          <Select.Option value="50">50</Select.Option>
-        </Select>
-      ),
-    },
   ]
 
   // 設定預設值 (例如每頁筆數預設 20)
-  const initialValues = {
-    pageSize: '20',
-  }
+  const initialValues = {}
 
   return (
     <ConfigProvider theme={theme}>

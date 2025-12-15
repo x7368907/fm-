@@ -1,6 +1,6 @@
 import type { ChangeLineDataType } from './types'
 
-export const MOCK_DATA: ChangeLineDataType[] = Array.from({ length: 5 }).map(
+export const MOCK_DATA: ChangeLineDataType[] = Array.from({ length: 60 }).map(
   (_, i) => ({
     key: i,
     sourceLevel: '4/5',

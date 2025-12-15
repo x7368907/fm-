@@ -1,6 +1,6 @@
 import type { PointsRecord } from './types'
 
-export const MOCK_DATA: PointsRecord[] = Array.from({ length: 6 }).map(
+export const MOCK_DATA: PointsRecord[] = Array.from({ length: 100 }).map(
   (_, i) => ({
     key: `${i}`,
     type: i % 2 === 0 ? '獎勵點數發放' : '獎勵點數回收',

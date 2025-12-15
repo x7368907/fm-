@@ -1,4 +1,4 @@
-import { Breadcrumb, Card, Input, Select } from 'antd'
+import { Breadcrumb, Card, Input, Select, ConfigProvider } from 'antd'
 
 // 1. 引入共用元件
 import SearchPanel, { type SearchField } from '../../../components/SearchPanel'
@@ -14,6 +14,7 @@ import HandlerModal from '../components/HandlerModal'
 import ProfitDetailModal from './form/ProfitDetailModal'
 import BetDetailModal from './form/BetDetailModal'
 
+const theme = { token: { colorPrimary: '#14b8a6' } }
 export default function PointsDetail() {
   const logic = usePointsDetail()
   const logsLogic = useHandlerLogs()
@@ -98,19 +99,6 @@ export default function PointsDetail() {
       colProps: { xs: 24, sm: 24, md: 8 }, // 加大：日期非常佔空間，給它一半(12)避免斷行
       render: () => <QuickRangePicker />,
     },
-    {
-      label: '每頁顯示', // 標題可以簡化
-      name: 'pageSize',
-      colProps: { xs: 24, sm: 12, md: 4 }, // 給 4，或者如果有更小的需求可以給 3
-      render: () => (
-        <Select style={{ width: '100%' }}>
-          {' '}
-          {/* 建議 width 改 100% 讓它填滿 md:4 的格子 */}
-          <Select.Option value="20">20筆/頁</Select.Option>
-          <Select.Option value="50">50筆/頁</Select.Option>
-        </Select>
-      ),
-    },
   ]
   // 設定表單預設值
   const initialValues = {
@@ -127,45 +115,52 @@ export default function PointsDetail() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 p-4">
-      <Breadcrumb separator=">" className="mb-4">
-        <Breadcrumb.Item>代理管理</Breadcrumb.Item>
-        <Breadcrumb.Item className="font-bold text-black">
-          代理分潤管理
-        </Breadcrumb.Item>
-      </Breadcrumb>
+    <ConfigProvider theme={theme}>
+      <div className="min-h-screen bg-gray-50 p-4">
+        <Breadcrumb separator=">" className="mb-4">
+          <Breadcrumb.Item>代理管理</Breadcrumb.Item>
+          <Breadcrumb.Item className="font-bold text-black">
+            代理分潤管理
+          </Breadcrumb.Item>
+        </Breadcrumb>
 
-      <SearchPanel
-        fields={searchFields}
-        initialValues={initialValues}
-        onSearch={handleSearch}
-      />
-
-      <Card className="shadow-sm" bodyStyle={{ padding: 0 }}>
-        <SummaryBar
-          activeTab={logic.activeTab}
-          onTabChange={logic.setActiveTab}
-          totalAmount={2954100}
+        <SearchPanel
+          fields={searchFields}
+          initialValues={initialValues}
+          onSearch={handleSearch}
         />
-        <PointsTable dataSource={logic.dataSource} columns={columns} />
-      </Card>
 
-      {/* Modals */}
-      <HandlerModal
-        open={logsLogic.isHandlerModalOpen}
-        onCancel={() => logsLogic.setIsHandlerModalOpen(false)}
-        logs={logsLogic.currentLogs}
-      />
-      <BetDetailModal
-        open={logic.isDetailModalOpen}
-        onCancel={() => logic.setIsDetailModalOpen(false)}
-        type={logic.detailModalType}
-      />
-      <ProfitDetailModal
-        open={logic.isProfitModalOpen}
-        onCancel={() => logic.setIsProfitModalOpen(false)}
-        profitMode={logic.currentProfitMode}
-      />
-    </div>
+        <Card className="shadow-sm" bodyStyle={{ padding: 0 }}>
+          <SummaryBar
+            activeTab={logic.activeTab}
+            onTabChange={logic.setActiveTab}
+            totalAmount={2954100}
+            counts={{
+              pending: logic.pendingCount,
+              approved: logic.approvedCount,
+              rejected: logic.rejectedCount,
+            }}
+          />
+          <PointsTable dataSource={logic.filteredData} columns={columns} />
+        </Card>
+
+        {/* Modals */}
+        <HandlerModal
+          open={logsLogic.isHandlerModalOpen}
+          onCancel={() => logsLogic.setIsHandlerModalOpen(false)}
+          logs={logsLogic.currentLogs}
+        />
+        <BetDetailModal
+          open={logic.isDetailModalOpen}
+          onCancel={() => logic.setIsDetailModalOpen(false)}
+          type={logic.detailModalType}
+        />
+        <ProfitDetailModal
+          open={logic.isProfitModalOpen}
+          onCancel={() => logic.setIsProfitModalOpen(false)}
+          profitMode={logic.currentProfitMode}
+        />
+      </div>
+    </ConfigProvider>
   )
 }

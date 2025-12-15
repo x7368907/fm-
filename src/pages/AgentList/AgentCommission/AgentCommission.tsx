@@ -55,26 +55,12 @@ export default function AgentCommission() {
         />
       ),
     },
-    {
-      label: '每頁顯示筆數',
-      name: 'pageSize',
-      colProps: { xs: 24, sm: 12, md: 4 },
-      render: () => (
-        <Select
-          options={[
-            { label: '20', value: '20' },
-            { label: '50', value: '50' },
-          ]}
-        />
-      ),
-    },
   ]
 
   // ★ 2. 設定初始值
   const initialValues = {
     profitRate: 'all',
     settlement: 'all',
-    pageSize: '20',
   }
 
   const handleCreate = () => {
