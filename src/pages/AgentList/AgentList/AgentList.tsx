@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import {
   Breadcrumb,
   ConfigProvider,
@@ -24,16 +24,20 @@ import type { DataType } from './types'
 const theme = { token: { colorPrimary: '#14b8a6' } }
 
 export default function AgentList() {
-  // ⭐ 代理層級邏輯（全部交給 hook）
-  const { agentList, cardTitle, searchByLevel, goNextLevel } =
-    useAgentHierarchy()
   const [view, setView] = useState<'list' | 'create' | 'edit'>('list')
   const [editing, setEditing] = useState<DataType | null>(null)
 
   const { logs, open, setOpen, fetchLogs } = useHandlerLogs()
 
-  //  Search Fields
+  // ⭐ 代理層級邏輯（全部交給 hook）
+  const { agentList, cardTitle, searchByLevel, goNextLevel } =
+    useAgentHierarchy()
 
+  /**
+   * =========================
+   * Search Fields（完整保留）
+   * =========================
+   */
   const searchFields: SearchField[] = [
     {
       label: '代理級別',
@@ -132,10 +136,13 @@ export default function AgentList() {
     },
   ]
 
-  // SearchPanel 初始值
+  /**
+   * =========================
+   * SearchPanel 初始值
+   * =========================
+   */
   const initialValues = {
-    level: 'lvl1',
-    system: 'all',
+    level: 'lvl1', // ⭐ 預設 1 級
   }
 
   const handleCreate = () => {
@@ -162,10 +169,6 @@ export default function AgentList() {
     </Button>
   )
 
-  useEffect(() => {
-    // 一進畫面就自動搜尋（預設 1 級）
-    searchByLevel(initialValues.level)
-  }, [])
   return (
     <ConfigProvider theme={theme}>
       <div className="min-h-screen bg-gray-50 p-4">

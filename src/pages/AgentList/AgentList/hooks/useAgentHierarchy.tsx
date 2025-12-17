@@ -1,36 +1,46 @@
 import { useEffect, useState } from 'react'
 import { message } from 'antd'
 import type { DataType } from '../types'
+import { MOCK_DATA } from '../mock'
 
 export type ViewMode = 'search' | 'hierarchy'
 
-export function useAgentHierarchy() {
+interface UseAgentHierarchyReturn {
+  agentList: DataType[]
+  cardTitle: React.ReactNode
+  viewMode: ViewMode
+
+  // actions
+  initDefaultLevel: () => void
+  searchByLevel: (levelValue: string) => void
+  goNextLevel: (record: DataType) => void
+  goBackToLevel: (index: number) => void
+}
+
+/**
+ * 代理層級 / 搜尋狀態管理
+ */
+export function useAgentHierarchy(): UseAgentHierarchyReturn {
+  // ⭐ Table 資料
   const [agentList, setAgentList] = useState<DataType[]>([])
+
+  // ⭐ Card title 層級
   const [cardLevelPath, setCardLevelPath] = useState<number[]>([1])
+
+  // ⭐ 每層對應的 parentKey（返回用）
   const [parentKeyPath, setParentKeyPath] = useState<(string | null)[]>([null])
+
+  // ⭐ 搜尋 / 層級 模式
   const [viewMode, setViewMode] = useState<ViewMode>('search')
-  const [loading, setLoading] = useState(false)
 
-  // 共用 API 呼叫
-  const fetchAgents = async (params: Record<string, any>) => {
-    setLoading(true)
-    try {
-      const query = new URLSearchParams(params).toString()
-      const res = await fetch(`/api/agents?${query}`)
-      const json = await res.json()
-      return json.data as DataType[]
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    } catch (e) {
-      message.error('取得代理資料失敗')
-      return []
-    } finally {
-      setLoading(false)
-    }
-  }
+  /**
+   * =========================
+   * 初始化：預設 1 級（搜尋模式）
+   * =========================
+   */
+  const initDefaultLevel = () => {
+    const list = MOCK_DATA.filter((a) => a.currentLevel === 1)
 
-  // 初始化：預設 1 級（搜尋模式）
-  const initDefaultLevel = async () => {
-    const list = await fetchAgents({ level: 1 })
     setAgentList(list)
     setCardLevelPath([1])
     setParentKeyPath([null])
@@ -41,27 +51,38 @@ export function useAgentHierarchy() {
     initDefaultLevel()
   }, [])
 
-  // 搜尋：依代理級別
-  const searchByLevel = async (levelValue: string) => {
+  /**
+   * =========================
+   * 搜尋：依代理級別
+   * =========================
+   */
+  const searchByLevel = (levelValue: string) => {
     if (!levelValue || levelValue === 'all') {
       message.warning('請選擇代理級別')
       return
     }
 
-    const level = Number(levelValue.replace('lvl', ''))
-    const list = await fetchAgents({ level })
+    const levelNumber = Number(levelValue.replace('lvl', ''))
+
+    const list = MOCK_DATA.filter((a) => a.currentLevel === levelNumber)
 
     setAgentList(list)
-    setCardLevelPath([level])
+    setCardLevelPath([levelNumber])
     setParentKeyPath([null])
     setViewMode('search')
   }
 
-  // 層級導覽：下一層
-  const goNextLevel = async (record: DataType) => {
-    if (record.currentLevel >= record.maxLevel) return
+  /**
+   * =========================
+   * 層級導覽：往下一層
+   * =========================
+   */
+  const goNextLevel = (record: DataType) => {
+    const nextLevel = record.currentLevel + 1
 
-    const list = await fetchAgents({ parentId: record.key })
+    if (nextLevel > record.maxLevel) return
+
+    const list = MOCK_DATA.filter((a) => a.parentKey === record.key)
 
     if (list.length === 0) {
       message.info('此代理沒有下線代理')
@@ -69,30 +90,42 @@ export function useAgentHierarchy() {
     }
 
     setAgentList(list)
-    setCardLevelPath((prev) => [...prev, record.currentLevel + 1])
+    setCardLevelPath((prev) => [...prev, nextLevel])
     setParentKeyPath((prev) => [...prev, record.key])
     setViewMode('hierarchy')
   }
 
-  // Card title 點擊返回
-  const goBackToLevel = async (index: number) => {
+  /**
+   * =========================
+   * Card title 點擊返回
+   * =========================
+   */
+  const goBackToLevel = (index: number) => {
     const parentKey = parentKeyPath[index]
     const level = cardLevelPath[index]
 
     const list =
       parentKey === null
-        ? await fetchAgents({ level })
-        : await fetchAgents({ parentId: parentKey })
+        ? MOCK_DATA.filter((a) => a.currentLevel === level)
+        : MOCK_DATA.filter((a) => a.parentKey === parentKey)
 
     setAgentList(list)
     setCardLevelPath(cardLevelPath.slice(0, index + 1))
     setParentKeyPath(parentKeyPath.slice(0, index + 1))
   }
 
-  // Card title
+  /**
+   * =========================
+   * Card title render（外部直接用）
+   * =========================
+   */
   const cardTitle =
     viewMode === 'search' ? (
-      levelTitle(cardLevelPath[0])
+      cardLevelPath[0] === 1 ? (
+        '1級總代理'
+      ) : (
+        `${cardLevelPath[0]}級代理`
+      )
     ) : (
       <div className="flex flex-wrap items-center gap-1">
         {cardLevelPath.map((level, idx) => (
@@ -101,7 +134,7 @@ export function useAgentHierarchy() {
               onClick={() => goBackToLevel(idx)}
               className="cursor-pointer text-blue-600 hover:underline"
             >
-              {levelTitle(level)}
+              {level === 1 ? '1級總代理' : `${level}級代理`}
             </span>
             {idx < cardLevelPath.length - 1 && ' > '}
           </span>
@@ -112,12 +145,11 @@ export function useAgentHierarchy() {
   return {
     agentList,
     cardTitle,
-    loading,
+    viewMode,
+
+    initDefaultLevel,
     searchByLevel,
     goNextLevel,
+    goBackToLevel,
   }
-}
-
-function levelTitle(level: number) {
-  return level === 1 ? '1級總代理' : `${level}級代理`
 }
