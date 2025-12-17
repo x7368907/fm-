@@ -29,7 +29,7 @@ export default function SearchPanel({
   extra,
 }: SearchPanelProps) {
   const [form] = Form.useForm()
-  const [activeKey, setActiveKey] = useState<string | string[]>(['1'])
+  const [activeKey, setActiveKey] = useState<string | string[]>([])
   const isActive = Array.isArray(activeKey) && activeKey.includes('1')
 
   const handleSearch = () => {

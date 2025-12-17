@@ -1,21 +1,25 @@
 import { useEffect, useRef, useState } from 'react'
 import { Table, Spin } from 'antd'
-
-import { MOCK_DATA } from '../mock'
-import { getColumns } from '../columns'
 import type { DataType } from '../types'
+import { getColumns } from '../columns'
 
-export default function AgentTable({
-  onEdit,
-  onLogs,
-  onViewFrontend,
-  onPoints,
-}: {
+interface Props {
+  data: DataType[] // ⭐ 該層「全部代理」
   onEdit: (r: DataType) => void
   onLogs: (r: DataType) => void
   onViewFrontend: (r: DataType) => void
   onPoints: (r: DataType) => void
-}) {
+  onLevelClick: (r: DataType) => void
+}
+
+export default function AgentTable({
+  data,
+  onEdit,
+  onLogs,
+  onViewFrontend,
+  onPoints,
+  onLevelClick,
+}: Props) {
   const [list, setList] = useState<DataType[]>([])
   const [limit, setLimit] = useState(20)
   const [loading, setLoading] = useState(false)
@@ -23,34 +27,56 @@ export default function AgentTable({
 
   const containerRef = useRef<HTMLDivElement>(null)
 
-  // ★ 初始載入 20 筆
+  /**
+   * =========================
+   * 當「層級資料 data 改變」
+   * 重置無限滾動狀態
+   * =========================
+   */
   useEffect(() => {
-    setList(MOCK_DATA.slice(0, 20))
-  }, [])
+    setList(data.slice(0, 20))
+    setLimit(20)
+    setFinished(data.length <= 20)
+    setLoading(false)
 
-  // ★ 無限滾動偵測
+    // 滾動回頂
+    if (containerRef.current) {
+      containerRef.current.scrollTop = 0
+    }
+  }, [data])
+
+  /**
+   * =========================
+   * 滾動偵測
+   * =========================
+   */
   const handleScroll = () => {
     const el = containerRef.current
     if (!el || loading || finished) return
 
     const isBottom = el.scrollTop + el.clientHeight >= el.scrollHeight - 20
+
     if (isBottom) loadMore()
   }
 
+  /**
+   * =========================
+   * 載入更多
+   * =========================
+   */
   const loadMore = () => {
     if (loading) return
     setLoading(true)
 
-    // 模擬延遲（未來換成 API 就放 fetch）
     setTimeout(() => {
       const newLimit = limit + 20
-      const nextData = MOCK_DATA.slice(0, newLimit)
+      const nextList = data.slice(0, newLimit)
 
-      setList(nextData)
+      setList(nextList)
       setLimit(newLimit)
       setLoading(false)
 
-      if (nextData.length >= MOCK_DATA.length) {
+      if (nextList.length >= data.length) {
         setFinished(true)
       }
     }, 700)
@@ -63,20 +89,28 @@ export default function AgentTable({
       onScroll={handleScroll}
     >
       <Table
-        columns={getColumns({ onEdit, onLogs, onViewFrontend, onPoints })}
+        className="[&_.ant-table-pagination]:!hidden"
+        columns={getColumns({
+          onEdit,
+          onLogs,
+          onViewFrontend,
+          onPoints,
+          onLevelClick,
+        })}
         dataSource={list}
         scroll={{ x: 1800 }}
-        pagination={false} // ★ 關掉 pagination
+        pagination={false}
+        rowKey="key"
       />
 
-      {/* ★ Loading UI */}
+      {/* Loading */}
       {loading && (
         <div className="flex justify-center py-3">
           <Spin tip="載入中..." />
         </div>
       )}
 
-      {/* ★ 已經載完 */}
+      {/* 已無更多資料 */}
       {finished && (
         <div className="py-3 text-center text-sm text-gray-400">
           已無更多資料

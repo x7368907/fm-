@@ -1,4 +1,5 @@
 // src/pages/AgentList/AgentCreate.tsx
+import type { DataType } from '../types'
 import React, { useEffect } from 'react'
 import {
   Breadcrumb,
@@ -40,23 +41,6 @@ const GAME_PROVIDERS = [
   },
   { category: '捕魚', providers: ['BT (0%)', '愛發 (0%)'] },
 ]
-
-// 定義傳入的資料型別 (與 List 頁面的一致)
-interface DataType {
-  key: React.Key
-  level: string
-  name: string
-  memberCount: number
-  account: string
-  realName: string
-  status: string
-  group: string
-  regTime: string
-  loginTime: string
-  system: string
-  cycle: string
-  // ... 其他需要的欄位
-}
 
 interface AgentCreateProps {
   onCancel: () => void
