@@ -75,10 +75,15 @@ export default function AgentCommission() {
 
   return (
     <ConfigProvider theme={themeConfig}>
-      <div className="min-h-screen bg-gray-50 p-6">
+      <div className="min-h-screen bg-gray-50 p-4">
         <Breadcrumb separator=">" className="mb-4">
           <Breadcrumb.Item>代理管理</Breadcrumb.Item>
-          <Breadcrumb.Item>分潤管理</Breadcrumb.Item>
+          <Breadcrumb.Item
+            onClick={() => setPage('list')}
+            className="cursor-pointer transition-colors hover:text-teal-600"
+          >
+            分潤管理
+          </Breadcrumb.Item>
           {page === 'form' && (
             <Breadcrumb.Item>
               {editingRecord ? '編輯分潤' : '新增分潤'}

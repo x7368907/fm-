@@ -64,7 +64,13 @@ export default function ChangeLine() {
       <div className="min-h-screen bg-gray-50 p-4">
         <Breadcrumb separator=">" className="mb-4">
           <Breadcrumb.Item>營運商管理</Breadcrumb.Item>
-          <Breadcrumb.Item>代理換線紀錄</Breadcrumb.Item>
+          <Breadcrumb.Item
+            className="cursor-pointer transition-colors hover:text-teal-600"
+            onClick={() => setView('list')}
+          >
+            代理換線紀錄
+          </Breadcrumb.Item>
+          {view === 'create' && <Breadcrumb.Item>新增換線</Breadcrumb.Item>}
         </Breadcrumb>
 
         {view === 'create' ? (

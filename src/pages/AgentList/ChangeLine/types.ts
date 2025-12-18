@@ -16,3 +16,19 @@ export interface ChangeLineDataType {
   profitName: string
   handler: string
 }
+
+export interface AgentData {
+  key: number
+  name: string
+  realName: string
+  profitSystem: string
+  profitName: string
+  cycle: string
+  memberCount: number
+}
+
+export interface LevelData {
+  label: string
+  count: number
+  active?: boolean
+}

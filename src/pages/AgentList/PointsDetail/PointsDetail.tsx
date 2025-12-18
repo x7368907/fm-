@@ -94,7 +94,20 @@ export default function PointsDetail() {
       <div className="min-h-screen bg-gray-50 p-4">
         <Breadcrumb separator=">" className="mb-4">
           <Breadcrumb.Item>營運商管理</Breadcrumb.Item>
-          <Breadcrumb.Item>點數加扣點紀錄</Breadcrumb.Item>
+          {/* 加入 onClick 讓使用者可以點擊回到列表 */}
+          <Breadcrumb.Item
+            className="cursor-pointer transition-colors hover:text-teal-600"
+            onClick={() => setView('list')}
+          >
+            點數加扣點紀錄
+          </Breadcrumb.Item>
+
+          {/* 動態顯示第三層 */}
+          {view !== 'list' && (
+            <Breadcrumb.Item>
+              {view === 'edit' ? '編輯加扣點' : '新增加扣點'}
+            </Breadcrumb.Item>
+          )}
         </Breadcrumb>
 
         {view !== 'list' ? (

@@ -1,26 +1,11 @@
-// 新增/編輯分潤表單元件
-import { useEffect } from 'react'
-import { Button, Select, Input, Form, InputNumber } from 'antd'
+import { Button, Select, Input, Form } from 'antd'
 import { SaveOutlined, CloseOutlined } from '@ant-design/icons'
 
-// 為了方便，這裡再次定義資料介面 (正式專案建議開一個 types.ts 檔)
-interface CommissionData {
-  key: string
-  system: string
-  name: string
-  agentLevel: string
-  agentName: string
-  shareRatio: number
-  rebateLive: number
-  rebateElec: number
-  rebateSport: number
-  rebateLottery: number
-  rebateChess: number
-  rebateFish: number
-  settlement: string
-}
+// 引入拆分後的模組
+import type { CommissionData } from '../types'
+import { useCommissionForm } from '../hooks/useCommissionForm'
+import RebateSettings from './components/RebateSettings'
 
-// 修改 Props：增加 initialValues
 interface CreateCommissionProps {
   initialValues?: CommissionData | null
   onCancel: () => void
@@ -32,48 +17,9 @@ export default function CreateCommission({
   onCancel,
   onSuccess,
 }: CreateCommissionProps) {
-  const [form] = Form.useForm()
+  // 使用 Hook 處理表單邏輯
+  const { form, handleSubmit } = useCommissionForm({ initialValues, onSuccess })
 
-  // 關鍵邏輯：當元件載入或 initialValues 改變時，回填表單
-  useEffect(() => {
-    if (initialValues) {
-      // --- 編輯模式：回填資料 ---
-      form.setFieldsValue({
-        system: initialValues.system === '佔成制' ? 'share' : 'rebate', // 模擬資料轉換
-        name: initialValues.name,
-        level: 'all', // 模擬資料
-        agentName: 'all', // 模擬資料
-        ratio: initialValues.shareRatio,
-        settlement: initialValues.settlement === '週結' ? 'week' : 'month',
-        // 特殊處理：將扁平的資料轉為 nested object 給表單
-        rebate: {
-          live: initialValues.rebateLive,
-          elec: initialValues.rebateElec,
-          sport: initialValues.rebateSport,
-          lottery: initialValues.rebateLottery,
-          chess: initialValues.rebateChess,
-          fish: initialValues.rebateFish,
-        },
-      })
-    } else {
-      // --- 新增模式：重置表單 ---
-      form.resetFields()
-    }
-  }, [initialValues, form])
-
-  const handleSave = () => {
-    form
-      .validateFields()
-      .then((values) => {
-        console.log(initialValues ? 'Updating:' : 'Creating:', values)
-        onSuccess()
-      })
-      .catch((info) => {
-        console.log('Validate Failed:', info)
-      })
-  }
-
-  // 判斷標題文字
   const title = initialValues ? '編輯分潤' : '新增分潤'
 
   return (
@@ -90,7 +36,6 @@ export default function CreateCommission({
         </div>
 
         <Form form={form} layout="vertical" className="max-w-4xl">
-          {/* 1. 代理制度 */}
           <Form.Item label="代理制度" name="system" initialValue="share">
             <Select>
               <Select.Option value="share">佔成制</Select.Option>
@@ -98,7 +43,6 @@ export default function CreateCommission({
             </Select>
           </Form.Item>
 
-          {/* 2. 分潤名稱 */}
           <Form.Item
             label="分潤名稱"
             name="name"
@@ -107,90 +51,51 @@ export default function CreateCommission({
             <Input placeholder="請輸入" />
           </Form.Item>
 
-          {/* 3. 代理級別選擇 */}
           <Form.Item label="代理級別選擇" name="level">
-            <Select placeholder="請選擇">
-              <Select.Option value="all">任一層級</Select.Option>
-            </Select>
+            <Select
+              placeholder="請選擇"
+              options={[
+                { label: '任一層級', value: 'any' },
+                { label: '1級總代理', value: '1' },
+                { label: '2級代理', value: '2' },
+                { label: '3級代理', value: '3' },
+                { label: '4級代理', value: '4' },
+                { label: '5級代理', value: '5' },
+              ]}
+            />
           </Form.Item>
-
-          {/* 4. 代理名稱選擇 */}
           <Form.Item label="代理名稱選擇" name="agentName">
-            <Select placeholder="請選擇">
-              <Select.Option value="all">任一代理</Select.Option>
-            </Select>
+            <Select
+              placeholder="請選擇"
+              options={[
+                { label: '任一代理', value: 'any' },
+                { label: 'FMCA(金流/成數代理-主站)', value: 'FMCA' },
+                { label: 'test123(測試帳號線)', value: 'test123' },
+                { label: 'XFW(金流/成數+返水代理-外單位)', value: 'XFW' },
+                { label: 'W02週結-(信用/成數代理-外單位)', value: 'W02' },
+                { label: 'W01週結-(信用/成數+返水代理-外單位)', value: 'W01' },
+              ]}
+            />
           </Form.Item>
-
-          {/* 5. 代理佔成比例 */}
           <Form.Item label="代理佔成比例(%)" name="ratio">
             <Input placeholder="請輸入" suffix="%" />
           </Form.Item>
 
-          {/* 6. 代理反水條件 */}
-          <Form.Item label="代理反水條件">
-            <div className="overflow-hidden rounded border border-gray-300">
-              <div className="grid grid-cols-6 divide-x divide-gray-300 bg-gray-200 text-center text-xs font-bold text-gray-700">
-                <div className="p-2">
-                  真人
-                  <br />
-                  (%)
-                </div>
-                <div className="p-2">
-                  電子
-                  <br />
-                  (%)
-                </div>
-                <div className="p-2">
-                  體育
-                  <br />
-                  (%)
-                </div>
-                <div className="p-2">
-                  彩票
-                  <br />
-                  (%)
-                </div>
-                <div className="p-2">
-                  棋牌
-                  <br />
-                  (%)
-                </div>
-                <div className="p-2">
-                  捕魚
-                  <br />
-                  (%)
-                </div>
-              </div>
-              <div className="grid grid-cols-6 divide-x divide-gray-300 bg-white">
-                {['live', 'elec', 'sport', 'lottery', 'chess', 'fish'].map(
-                  (item) => (
-                    <div key={item} className="p-1">
-                      <Form.Item name={['rebate', item]} noStyle>
-                        <InputNumber
-                          min={0}
-                          max={100}
-                          className="w-full text-center"
-                          bordered={false}
-                          placeholder="0"
-                        />
-                      </Form.Item>
-                    </div>
-                  )
-                )}
-              </div>
-            </div>
-          </Form.Item>
+          {/* 模組化的反水設定區塊 */}
+          <RebateSettings />
 
-          {/* 7. 代理分潤結算 */}
           <Form.Item label="代理分潤結算" name="settlement">
             <Select placeholder="請選擇">
-              <Select.Option value="week">週結</Select.Option>
-              <Select.Option value="month">月結</Select.Option>
+              <Select.Option value="week">週結(每週日-23:59:59)</Select.Option>
+              <Select.Option value="month">
+                月結(每月最後一天-23:59:59)
+              </Select.Option>
             </Select>
           </Form.Item>
         </Form>
       </div>
 
+      {/* 底部按鈕區 */}
       <div className="flex justify-center gap-4 border-t border-gray-200 bg-gray-50 p-4">
         <Button
           size="large"
@@ -205,7 +110,7 @@ export default function CreateCommission({
           size="large"
           icon={<SaveOutlined />}
           className="border-green-600 bg-green-600 hover:!bg-green-700"
-          onClick={handleSave}
+          onClick={handleSubmit}
         >
           儲存
         </Button>

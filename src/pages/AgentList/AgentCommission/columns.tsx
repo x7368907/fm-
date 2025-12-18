@@ -40,13 +40,20 @@ export const getColumns = (opts: {
       title: '分潤制度',
       dataIndex: 'system',
       width: 100,
+      align: 'center',
       render: (text) => (
         <Tag color={text === '佔成制' ? 'blue' : 'cyan'}>{text}</Tag>
       ),
     },
-    { title: '分潤名稱', dataIndex: 'name', width: 250, ellipsis: true },
-    { title: '代理層級', dataIndex: 'agentLevel', width: 100 },
-    { title: '代理名稱', dataIndex: 'agentName', width: 100 },
+    {
+      title: '分潤名稱',
+      dataIndex: 'name',
+      width: 250,
+      align: 'center',
+      ellipsis: true,
+    },
+    { title: '代理層級', dataIndex: 'agentLevel', align: 'center', width: 100 },
+    { title: '代理名稱', dataIndex: 'agentName', align: 'center', width: 100 },
     {
       title: '佔成比例(%)',
       dataIndex: 'shareRatio',
@@ -70,8 +77,9 @@ export const getColumns = (opts: {
       ],
     },
     {
-      title: '結算',
+      title: '代理分潤結算',
       dataIndex: 'settlement',
+      align: 'center',
       width: 150,
       render: (text) => (
         <div className="flex flex-col items-center">
