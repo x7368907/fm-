@@ -13,15 +13,15 @@ import ChangeLine from './pages/AgentList/ChangeLine/ChangeLine'
 import ProfitManagement from './pages/AgentList/ProfitManagement/ProfitManagement'
 // 代理管理-end
 // 會員管理-start
-// import MemberDetail from './pages/member/Detail'
-// import MemberBankCard from './pages/member/BankCard'
-// import MemberDiscount from './pages/member/Discount'
-// import MemberReturnWater from './pages/member/ReturnWater'
-// import MemberPrivilege from './pages/member/Privilege'
-// import MemberLogin from './pages/member/Login'
-// import MemberChangeLine from './pages/member/ChangeLine'
+import MemberDetail from './pages/member/Detail/Detail'
+// import MemberBankCard from './pages/member/BankCard/BankCard'
+// import MemberDiscount from './pages/member/Discount/Discount'
+// import MemberReturnWater from './pages/member/ReturnWater/ReturnWater'
+// import MemberPrivilege from './pages/member/Privilege/Privilege'
+// import MemberLogin from './pages/member/Login/Login'
+// import MemberChangeLine from './pages/member/ChangeLine/ChangeLine'
 // import MemberChangeAgent from './pages/member/ChangeAgent'
-// import MemberWalletRecord from './pages/member/WalletRecord'
+// import MemberWalletRecord from './pages/member/WalletRecord/WalletRecord'
 // 會員管理-end
 // 特權管理-start
 // import DiscountManagement from './pages/operations/DiscountManagement'
@@ -64,24 +64,24 @@ export default function App() {
               <Route path="changeLine" element={<ChangeLine />} />
               <Route path="profitManagement" element={<ProfitManagement />} />
             </Route>
-            {/* <Route path="member">
+            <Route path="member">
               <Route path="detail" element={<MemberDetail />} />
-              <Route path="bankCard" element={<MemberBankCard />} />
+              {/* <Route path="bankCard" element={<MemberBankCard />} />
               <Route path="discount" element={<MemberDiscount />} />
               <Route path="returnWater" element={<MemberReturnWater />} />
               <Route path="privilege" element={<MemberPrivilege />} />
               <Route path="login" element={<MemberLogin />} />
               <Route path="changeLine" element={<MemberChangeLine />} />
               <Route path="changeAgent" element={<MemberChangeAgent />} />
-              <Route path="walletRecord" element={<MemberWalletRecord />} />
-            </Route> */}
-            {/* <Route path="operations">
-              <Route path="discount" element={<DiscountManagement />} />
+              <Route path="walletRecord" element={<MemberWalletRecord />} /> */}
+            </Route>
+            <Route path="operations">
+              {/* <Route path="discount" element={<DiscountManagement />} />
               <Route path="privilege" element={<PrivilegeManagement />} />
-              <Route path="announce" element={<AnnouncementManagement />} />
-            </Route> */}
-            {/* <Route path="financial">
-              <Route path="integrate" element={<IntegratedReporting />} />
+              <Route path="announce" element={<AnnouncementManagement />} /> */}
+            </Route>
+            <Route path="financial">
+              {/* <Route path="integrate" element={<IntegratedReporting />} />
               <Route path="consignment" element={<ConsignmentManagement />} />
               <Route
                 path="gameSubmissionManagement"
@@ -97,8 +97,8 @@ export default function App() {
               <Route
                 path="transactionStatisticsRecord"
                 element={<TransactionStatisticsRecord />}
-              />
-            </Route> */}
+              /> */}
+            </Route>
           </Route>
         )}
       </Routes>
