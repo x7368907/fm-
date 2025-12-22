@@ -79,8 +79,12 @@ export default function AgentCommission() {
         <Breadcrumb separator=">" className="mb-4">
           <Breadcrumb.Item>代理管理</Breadcrumb.Item>
           <Breadcrumb.Item
-            onClick={() => setPage('list')}
-            className="cursor-pointer transition-colors hover:text-teal-600"
+            onClick={page === 'form' ? () => setPage('list') : undefined}
+            className={
+              page === 'form'
+                ? 'cursor-pointer transition-colors hover:text-teal-600'
+                : ''
+            }
           >
             分潤管理
           </Breadcrumb.Item>

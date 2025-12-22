@@ -182,9 +182,12 @@ export default function AgentList() {
         */}
         <Breadcrumb separator=">" className="mb-4">
           <Breadcrumb.Item>代理管理</Breadcrumb.Item>
-          {/* 點擊「代理資料」可強制回到列表模式 */}
           <Breadcrumb.Item
-            className="cursor-pointer transition-colors hover:text-teal-600"
+            className={
+              view !== 'list'
+                ? 'cursor-pointer transition-colors hover:text-teal-600'
+                : ''
+            }
             onClick={() => setView('list')}
           >
             代理資料

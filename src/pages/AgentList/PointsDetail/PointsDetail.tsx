@@ -96,7 +96,11 @@ export default function PointsDetail() {
           <Breadcrumb.Item>營運商管理</Breadcrumb.Item>
           {/* 加入 onClick 讓使用者可以點擊回到列表 */}
           <Breadcrumb.Item
-            className="cursor-pointer transition-colors hover:text-teal-600"
+            className={
+              view !== 'list'
+                ? 'cursor-pointer transition-colors hover:text-teal-600'
+                : ''
+            }
             onClick={() => setView('list')}
           >
             點數加扣點紀錄

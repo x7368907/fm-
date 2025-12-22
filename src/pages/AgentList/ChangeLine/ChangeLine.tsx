@@ -65,7 +65,11 @@ export default function ChangeLine() {
         <Breadcrumb separator=">" className="mb-4">
           <Breadcrumb.Item>營運商管理</Breadcrumb.Item>
           <Breadcrumb.Item
-            className="cursor-pointer transition-colors hover:text-teal-600"
+            className={
+              view === 'create'
+                ? 'cursor-pointer transition-colors hover:text-teal-600'
+                : ''
+            }
             onClick={() => setView('list')}
           >
             代理換線紀錄
