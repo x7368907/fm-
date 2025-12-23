@@ -232,7 +232,8 @@ export default function BankCardTable({
         columns={columns}
         dataSource={list}
         scroll={{ x: 1600 }}
-        pagination={false} // ★ 關掉分頁
+        pagination={false}
+        sticky
       />
 
       {/* Loading */}

@@ -64,6 +64,7 @@ export default function CommissionTable({
         bordered
         scroll={{ x: 1300 }}
         pagination={false}
+        sticky
       />
 
       {/* ★ Loading 效果 */}

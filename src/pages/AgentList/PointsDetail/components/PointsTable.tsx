@@ -63,10 +63,11 @@ export default function PointsTable({
       <Table
         columns={getColumns({ onUpdateNote, onLogs })}
         dataSource={list}
-        pagination={false} // ★ 關閉 pagination
+        pagination={false}
         scroll={{ x: 1500 }}
         size="middle"
         rowClassName="align-top"
+        sticky
       />
 
       {/* ★ Loading UI */}

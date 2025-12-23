@@ -28,7 +28,6 @@ export default function MemberTable({ onEdit, onLogs }: MemberTableProps) {
 
   const containerRef = useRef<HTMLDivElement>(null)
 
-  // ===== 欄位（完全沿用你原本的）=====
   const columns: ColumnsType<DataType> = [
     {
       title: '標籤',
@@ -355,7 +354,8 @@ export default function MemberTable({ onEdit, onLogs }: MemberTableProps) {
         columns={columns}
         dataSource={list}
         scroll={{ x: 2500 }}
-        pagination={false} // ★ 關閉分頁
+        pagination={false}
+        sticky
       />
 
       {loading && (

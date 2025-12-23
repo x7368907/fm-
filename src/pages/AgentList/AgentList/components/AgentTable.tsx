@@ -101,6 +101,7 @@ export default function AgentTable({
         scroll={{ x: 1800 }}
         pagination={false}
         rowKey="key"
+        sticky
       />
 
       {/* Loading */}

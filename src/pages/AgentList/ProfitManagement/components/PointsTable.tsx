@@ -50,7 +50,7 @@ export default function PointsTable({ dataSource, columns }: Props) {
   }
 
   return (
-    <Card bordered={false} className="shadow-sm">
+    <Card className="shadow-sm">
       <div
         ref={containerRef}
         style={{ maxHeight: '600px', overflowY: 'auto' }}
@@ -60,9 +60,10 @@ export default function PointsTable({ dataSource, columns }: Props) {
           columns={columns}
           dataSource={list}
           scroll={{ x: 1300 }}
-          pagination={false} // ★ 分頁關閉
+          pagination={false}
           size="middle"
           rowClassName="hover:bg-blue-50"
+          sticky
         />
 
         {/* ★ Loading 效果 */}

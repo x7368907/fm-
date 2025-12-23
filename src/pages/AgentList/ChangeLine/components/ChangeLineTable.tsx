@@ -59,9 +59,10 @@ export default function ChangeLineTable({
       <Table
         columns={getColumns({ onLogs })}
         dataSource={list}
-        pagination={false} // ★ 關閉 antd 分頁
+        pagination={false}
         scroll={{ x: 1300 }}
         rowClassName="hover:bg-blue-50"
+        sticky
       />
 
       {/* ★ Loading 效果 */}
