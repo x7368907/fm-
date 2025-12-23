@@ -15,8 +15,8 @@ import ProfitManagement from './pages/AgentList/ProfitManagement/ProfitManagemen
 // 會員管理-start
 import MemberDetail from './pages/member/Detail/Detail'
 import MemberBankCard from './pages/member/BankCard/BankCard'
-// import MemberDiscount from './pages/member/Discount/Discount'
-// import MemberReturnWater from './pages/member/ReturnWater/ReturnWater'
+import MemberDiscount from './pages/member/Discount/Discount'
+import MemberReturnWater from './pages/member/ReturnWater/ReturnWater'
 // import MemberPrivilege from './pages/member/Privilege/Privilege'
 // import MemberLogin from './pages/member/Login/Login'
 // import MemberChangeLine from './pages/member/ChangeLine/ChangeLine'
@@ -67,9 +67,9 @@ export default function App() {
             <Route path="member">
               <Route path="detail" element={<MemberDetail />} />
               <Route path="bankCard" element={<MemberBankCard />} />
-              {/* <Route path="discount" element={<MemberDiscount />} />
+              <Route path="discount" element={<MemberDiscount />} />
               <Route path="returnWater" element={<MemberReturnWater />} />
-              <Route path="privilege" element={<MemberPrivilege />} />
+              {/* <Route path="privilege" element={<MemberPrivilege />} />
               <Route path="login" element={<MemberLogin />} />
               <Route path="changeLine" element={<MemberChangeLine />} />
               <Route path="changeAgent" element={<MemberChangeAgent />} />
