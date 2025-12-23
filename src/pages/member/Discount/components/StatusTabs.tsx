@@ -38,7 +38,7 @@ export default function StatusTabs({
   }
 
   return (
-    <div className="pl-2">
+    <div className="mb-4 pl-2">
       <StatusButton label="待審核" value="pending" count={counts.pending} />
       <StatusButton label="已派發" value="active" count={counts.active} />
       <StatusButton label="已拒絕" value="rejected" count={counts.rejected} />
