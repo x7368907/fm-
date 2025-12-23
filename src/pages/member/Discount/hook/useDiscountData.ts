@@ -39,8 +39,11 @@ export const useDiscountData = () => {
       active: '啟用',
       rejected: '拒絕',
       disabled: '停用',
-    }
-    message.info(`狀態已變更為：${statusMap[newStatus]}`)
+    } as const
+
+    message.info(
+      `狀態已變更為：${statusMap[newStatus as keyof typeof statusMap]}`
+    )
   }
 
   // 根據 Tab 過濾資料
