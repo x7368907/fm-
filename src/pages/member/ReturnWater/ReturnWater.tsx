@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/ban-ts-comment */
 import { useState } from 'react'
 import { Breadcrumb, ConfigProvider, Select, Input, Card } from 'antd'
 
@@ -23,7 +22,6 @@ export default function MemberRebateApplication() {
   const [activeTimeProvider, setTimeProvider] = useState('時')
 
   // 2. Hooks 邏輯
-  // @ts-expect-error
   const { openBatchModal, BatchModal } = useRebateModal()
   const { isLogModalOpen, currentLogs, showLogs, closeLogs } = useRebateLogs()
 
