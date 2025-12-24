@@ -17,7 +17,7 @@ import MemberDetail from './pages/member/Detail/Detail'
 import MemberBankCard from './pages/member/BankCard/BankCard'
 import MemberDiscount from './pages/member/Discount/Discount'
 import MemberReturnWater from './pages/member/ReturnWater/ReturnWater'
-// import MemberPrivilege from './pages/member/Privilege/Privilege'
+import MemberPrivilege from './pages/member/Privilege/Privilege'
 // import MemberLogin from './pages/member/Login/Login'
 // import MemberChangeLine from './pages/member/ChangeLine/ChangeLine'
 // import MemberChangeAgent from './pages/member/ChangeAgent'
@@ -69,8 +69,8 @@ export default function App() {
               <Route path="bankCard" element={<MemberBankCard />} />
               <Route path="discount" element={<MemberDiscount />} />
               <Route path="returnWater" element={<MemberReturnWater />} />
-              {/* <Route path="privilege" element={<MemberPrivilege />} />
-              <Route path="login" element={<MemberLogin />} />
+              <Route path="privilege" element={<MemberPrivilege />} />
+              {/* <Route path="login" element={<MemberLogin />} />
               <Route path="changeLine" element={<MemberChangeLine />} />
               <Route path="changeAgent" element={<MemberChangeAgent />} />
               <Route path="walletRecord" element={<MemberWalletRecord />} /> */}
