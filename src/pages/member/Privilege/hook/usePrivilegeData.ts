@@ -3,12 +3,12 @@ import type { PrivilegeDataType } from '../types'
 import { MOCK_DATA } from '../utils/fakeData'
 
 export const usePrivilegeData = () => {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [dataSource, setDataSource] = useState<PrivilegeDataType[]>(MOCK_DATA)
 
   // 這裡可以加入搜尋、過濾等邏輯
   const handleSearch = (values: any) => {
     console.log('搜尋條件:', values)
+    console.log(setDataSource)
     // 實作搜尋邏輯...
   }
 

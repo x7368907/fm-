@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import { useEffect } from 'react'
 import { Form, Button, Breadcrumb, ConfigProvider, Divider } from 'antd'
 import { SaveOutlined, CloseOutlined } from '@ant-design/icons'
 

@@ -12,8 +12,6 @@ import type { PrivilegeDataType } from './types'
 import SearchPanel, { type SearchField } from '../../../components/SearchPanel'
 import HandlerModal from '../../AgentList/components/HandlerModal'
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-const { Option } = Select
 const themeConfig = { token: { colorPrimary: '#14b8a6' } }
 
 export default function Privilege() {
