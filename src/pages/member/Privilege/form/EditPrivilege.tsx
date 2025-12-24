@@ -83,7 +83,12 @@ export default function EditPrivilege({
       <div className="min-h-screen w-full bg-gray-50 p-4 pb-20">
         <Breadcrumb separator=">" className="mb-4">
           <Breadcrumb.Item>會員管理</Breadcrumb.Item>
-          <Breadcrumb.Item>會員特權管理</Breadcrumb.Item>
+          <Breadcrumb.Item
+            onClick={onCancel}
+            className="cursor-pointer transition-colors hover:text-teal-600"
+          >
+            會員特權管理
+          </Breadcrumb.Item>
           <Breadcrumb.Item>編輯會員特權</Breadcrumb.Item>
         </Breadcrumb>
 
