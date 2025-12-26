@@ -90,18 +90,6 @@ export default function MemberLogin() {
       colProps: { xs: 24, sm: 12, md: 8 },
       render: () => <QuickRangePicker />,
     },
-    {
-      label: '每頁顯示筆數',
-      name: 'pageSize',
-      colProps: { xs: 24, sm: 12, md: 4 },
-      render: () => (
-        <Select>
-          <Option value="20">20</Option>
-          <Option value="50">50</Option>
-          <Option value="100">100</Option>
-        </Select>
-      ),
-    },
   ]
 
   // 4. 切換到新增/編輯頁
