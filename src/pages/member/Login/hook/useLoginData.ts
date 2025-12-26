@@ -4,7 +4,6 @@ import type { MemberLoginType } from '../types'
 import { MOCK_DATA } from '../utils/fakeData'
 
 export const useLoginData = () => {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [dataSource, setDataSource] = useState<MemberLoginType[]>(MOCK_DATA)
 
   // 取得所有 Key，用於全選
@@ -52,6 +51,7 @@ export const useLoginData = () => {
 
   const handleSearch = (values: any) => {
     console.log('Search:', values)
+    console.log(setDataSource)
     // 實作搜尋邏輯...
   }
 
