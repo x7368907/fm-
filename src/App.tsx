@@ -18,8 +18,8 @@ import MemberBankCard from './pages/member/BankCard/BankCard'
 import MemberDiscount from './pages/member/Discount/Discount'
 import MemberReturnWater from './pages/member/ReturnWater/ReturnWater'
 import MemberPrivilege from './pages/member/Privilege/Privilege'
-// import MemberLogin from './pages/member/Login/Login'
-// import MemberChangeLine from './pages/member/ChangeLine/ChangeLine'
+import MemberLogin from './pages/member/Login/Login'
+import MemberChangeLine from './pages/member/ChangeLine/ChangeLine'
 // import MemberChangeAgent from './pages/member/ChangeAgent'
 // import MemberWalletRecord from './pages/member/WalletRecord/WalletRecord'
 // 會員管理-end
@@ -70,9 +70,9 @@ export default function App() {
               <Route path="discount" element={<MemberDiscount />} />
               <Route path="returnWater" element={<MemberReturnWater />} />
               <Route path="privilege" element={<MemberPrivilege />} />
-              {/* <Route path="login" element={<MemberLogin />} />
+              <Route path="login" element={<MemberLogin />} />
               <Route path="changeLine" element={<MemberChangeLine />} />
-              <Route path="changeAgent" element={<MemberChangeAgent />} />
+              {/* <Route path="changeAgent" element={<MemberChangeAgent />} />
               <Route path="walletRecord" element={<MemberWalletRecord />} /> */}
             </Route>
             <Route path="operations">
