@@ -21,12 +21,12 @@ import MemberPrivilege from './pages/member/Privilege/Privilege'
 import MemberLogin from './pages/member/Login/Login'
 import MemberChangeLine from './pages/member/ChangeLine/ChangeLine'
 import MemberChangeAgent from './pages/member/ChangeAgent'
-// import MemberWalletRecord from './pages/member/WalletRecord/WalletRecord'
+import MemberWalletRecord from './pages/member/WalletRecord/WalletRecord'
 // 會員管理-end
 // 特權管理-start
-// import DiscountManagement from './pages/operations/DiscountManagement'
+// import DiscountManagement from './pages/operations/Discount/DiscountManagement'
 // import PrivilegeManagement from './pages/operations/PrivilegeManagement'
-// import AnnouncementManagement from './pages/operations/AnnouncementManagement/AnnouncementManagement'
+// import AnnouncementManagement from './pages/operations/Announcement/AnnouncementManagement'
 // 特權管理-end
 // 財務管理-start
 // import ConsignmentManagement from './pages/financial/ConsignmentManagement'
@@ -73,7 +73,7 @@ export default function App() {
               <Route path="login" element={<MemberLogin />} />
               <Route path="changeLine" element={<MemberChangeLine />} />
               <Route path="changeAgent" element={<MemberChangeAgent />} />
-              {/* <Route path="walletRecord" element={<MemberWalletRecord />} /> */}
+              <Route path="walletRecord" element={<MemberWalletRecord />} />
             </Route>
             <Route path="operations">
               {/* <Route path="discount" element={<DiscountManagement />} />
