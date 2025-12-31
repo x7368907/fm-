@@ -6,7 +6,7 @@ export interface HandlerLogData {
   key: string
   time: string
   handler: string
-  status: '新增' | '修改' | '刪除'
+  status: string
   details: string
 }
 

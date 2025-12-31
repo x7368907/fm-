@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
-import { Table, Button, Select, Spin } from 'antd'
+import { Table, Button, Select, Spin, Tag } from 'antd' // 1. 引入 Tag
 import { FileTextOutlined } from '@ant-design/icons'
 import type { ColumnsType } from 'antd/es/table'
 import type { BankCardType } from '../types'
@@ -25,24 +25,33 @@ export default function BankCardTable({
 
   const containerRef = useRef<HTMLDivElement>(null)
 
-  // ===== 欄位（完全沿用你原本的）=====
+  // ===== 欄位 =====
   const columns: ColumnsType<BankCardType> = [
     {
       title: '標籤',
       dataIndex: 'tag',
       key: 'tag',
-      width: 100,
-      render: (text, record) => (
-        <div
-          className={`px-2 py-1 text-center text-xs ${
-            record.tagType === 'danger'
-              ? 'border border-red-500 bg-white text-red-500'
-              : 'bg-gray-200 text-gray-600'
-          }`}
-        >
-          {text}
-        </div>
-      ),
+      width: 160,
+      align: 'center',
+      fixed: 'left',
+      render: (text, record) => {
+        // 3. 修改樣式邏輯：對齊託售申請頁面
+        if (record.tagType === 'danger' || record.tagType === 'ip_black') {
+          return <Tag color="error">{text}</Tag>
+        }
+        if (record.tagType === 'money_black') {
+          return <Tag color="magenta">{text}</Tag>
+        }
+        if (record.tagType === 'new') {
+          return <Tag color="success">{text}</Tag>
+        }
+        // 預設 (一般會員樣式)
+        return (
+          <Tag bordered={false} className="bg-gray-100 text-gray-600">
+            {text}
+          </Tag>
+        )
+      },
     },
     { title: '會員帳號', dataIndex: 'account', key: 'account', width: 120 },
     { title: '會員姓名', dataIndex: 'name', key: 'name', width: 100 },
