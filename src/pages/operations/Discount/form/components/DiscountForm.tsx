@@ -1,4 +1,3 @@
-import React from 'react'
 import { Form, Select, Input, Button, Checkbox } from 'antd'
 import { PlusOutlined, MinusOutlined, CloseOutlined } from '@ant-design/icons'
 
