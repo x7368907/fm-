@@ -24,14 +24,14 @@ import MemberChangeAgent from './pages/member/ChangeAgent'
 import MemberWalletRecord from './pages/member/WalletRecord/WalletRecord'
 // 會員管理-end
 // 特權管理-start
-// import DiscountManagement from './pages/operations/Discount/DiscountManagement'
+import DiscountManagement from './pages/operations/Discount/DiscountManagement'
 import PrivilegeManagement from './pages/operations/Privilege/PrivilegeManagement'
 // import AnnouncementManagement from './pages/operations/Announcement/AnnouncementManagement'
 // 特權管理-end
 // 財務管理-start
 // import ConsignmentManagement from './pages/financial/Consign/ConsignmentManagement'
-// import GameSubmissionManagement from './pages/financial/GameSubmissionManagement'
-// import GameSubmissionSettings from './pages/financial/GameSubmissionSettings'
+// import GameSubmissionManagement from './pages/financial/GameManagement/GameSubmissionManagement'
+// import GameSubmissionSettings from './pages/financial/GameSetting/GameSubmissionSettings'
 // import IntegratedReporting from './pages/financial/Integrated/IntegratedReporting'
 // import FlowManagement from './pages/financial/PayMentFlow/PaymentFlowManagement'
 // import GroupManagement from './pages/financial/PayMentGroup/PaymentGroupManagement'
@@ -76,7 +76,7 @@ export default function App() {
               <Route path="walletRecord" element={<MemberWalletRecord />} />
             </Route>
             <Route path="operations">
-              {/* <Route path="discount" element={<DiscountManagement />} /> */}
+              <Route path="discount" element={<DiscountManagement />} />
               <Route path="privilege" element={<PrivilegeManagement />} />
               {/* <Route path="announce" element={<AnnouncementManagement />} /> */}
             </Route>
