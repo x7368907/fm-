@@ -41,13 +41,6 @@ const MemberCreate: React.FC<MemberCreateProps> = ({
   const isEdit = mode === 'edit'
   const isCreate = mode === 'create'
 
-  // 卡片標題樣式
-  const cardHeadStyle = {
-    background: '#e6e6e6',
-    fontWeight: 'bold',
-    borderLeft: '4px solid #666',
-  }
-
   return (
     <div className="min-h-screen bg-gray-100 px-4 pb-20">
       <Breadcrumb separator=">" style={{ padding: '16px' }}>
@@ -70,8 +63,8 @@ const MemberCreate: React.FC<MemberCreateProps> = ({
       <Form
         form={form}
         layout="horizontal"
-        labelCol={{ span: 9 }}
-        wrapperCol={{ span: 15 }}
+        labelCol={{ flex: '120px' }}
+        wrapperCol={{ flex: 1 }}
         labelAlign="left"
         initialValues={initialValues || { gender: 'male', status: 'active' }}
       >
@@ -181,7 +174,7 @@ const MemberCreate: React.FC<MemberCreateProps> = ({
             </Card>
 
             {/* 2. 會員資料卡片 */}
-            <Card title="會員資料" size="small" headStyle={cardHeadStyle}>
+            <Card title="會員資料" size="small">
               <Form.Item label="會員姓名" name="memberName" required>
                 <Input placeholder="請輸入" />
               </Form.Item>
