@@ -168,7 +168,7 @@ const MemberCreate: React.FC<MemberCreateProps> = ({
                 </>
               )}
 
-              <Form.Item label="備註" name="note">
+              <Form.Item label="備註" name="note" className="mt-6">
                 <TextArea rows={4} />
               </Form.Item>
             </Card>
