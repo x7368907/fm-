@@ -26,7 +26,7 @@ import MemberWalletRecord from './pages/member/WalletRecord/WalletRecord'
 // 特權管理-start
 import DiscountManagement from './pages/operations/Discount/DiscountManagement'
 import PrivilegeManagement from './pages/operations/Privilege/PrivilegeManagement'
-// import AnnouncementManagement from './pages/operations/Announcement/AnnouncementManagement'
+import AnnouncementManagement from './pages/operations/Announcement/AnnouncementManagement'
 // 特權管理-end
 // 財務管理-start
 // import ConsignmentManagement from './pages/financial/Consign/ConsignmentManagement'
@@ -36,8 +36,19 @@ import PrivilegeManagement from './pages/operations/Privilege/PrivilegeManagemen
 // import FlowManagement from './pages/financial/PayMentFlow/PaymentFlowManagement'
 // import GroupManagement from './pages/financial/PayMentGroup/PaymentGroupManagement'
 // import StoredManagement from './pages/financial/Stored/StoredManagement'
-// import TransactionStatisticsRecord from './pages/financial/TransactionStatisticsRecord'
+// import TransactionStatisticsRecord from './pages/financial/Transaction/TransactionStatisticsRecord'
 // 財務管理-end
+// 遊戲商管理-start
+// import GameManagement from './pages/gameDealer/GameManagement/GameManagement'
+// import GameRedLimitSetting from './pages/gameDealer/GameRedLimit/GameRedLimitSetting'
+// import GameVendorRepairManagement from './pages/gameDealer/GameVendorRepair/GameVendorRepairManagement'
+// import LiveBettingReport from './pages/gameDealer/LiveBettingReport'
+// import ElectronicBettingReport from './pages/gameDealer/ElectronicBettingReport'
+// import SportsBettingReport from './pages/gameDealer/SportsBettingReport'
+// import LotteryBettingReport from './pages/gameDealer/LotteryBettingReport'
+// import CardGameBettingReport from './pages/gameDealer/CardGameBettingReport'
+// import FishingBettingReport from './pages/gameDealer/FishingBettingReport'
+// 遊戲商管理-end
 export default function App() {
   const isLoggedIn = useAuthStore((state) => state.isLoggedIn)
   const initializeAuth = useAuthStore((state) => state.initializeAuth)
@@ -78,7 +89,7 @@ export default function App() {
             <Route path="operations">
               <Route path="discount" element={<DiscountManagement />} />
               <Route path="privilege" element={<PrivilegeManagement />} />
-              {/* <Route path="announce" element={<AnnouncementManagement />} /> */}
+              <Route path="announce" element={<AnnouncementManagement />} />
             </Route>
             <Route path="financial">
               {/* <Route path="integrate" element={<IntegratedReporting />} />
@@ -97,6 +108,38 @@ export default function App() {
               <Route
                 path="transactionStatisticsRecord"
                 element={<TransactionStatisticsRecord />}
+              /> */}
+            </Route>
+            <Route path="game">
+              {/* <Route path="gameManagement" element={<GameManagement />} />
+              <Route
+                path="gameRedLimitSetting"
+                element={<GameRedLimitSetting />}
+              />
+              <Route
+                path="gameVendorRepairManagement"
+                element={<GameVendorRepairManagement />}
+              />
+              <Route path="liveBettingReport" element={<LiveBettingReport />} />
+              <Route
+                path="electronicBettingReport"
+                element={<ElectronicBettingReport />}
+              />
+              <Route
+                path="sportsBettingReport"
+                element={<SportsBettingReport />}
+              />
+              <Route
+                path="lotteryBettingReport"
+                element={<LotteryBettingReport />}
+              />
+              <Route
+                path="cardGameBettingReport"
+                element={<CardGameBettingReport />}
+              />
+              <Route
+                path="fishingBettingReport"
+                element={<FishingBettingReport />}
               /> */}
             </Route>
           </Route>
