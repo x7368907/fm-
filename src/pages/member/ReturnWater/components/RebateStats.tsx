@@ -52,7 +52,7 @@ export default function RebateStats({
               key={item.key}
               type={activeProvider === item.key ? 'primary' : 'default'}
               onClick={() => setActiveProvider(item.key)}
-              className="h-auto px-2 py-3 text-center"
+              className="h-auto w-20 px-2 py-3 text-center"
             >
               <div className="text-sm">{item.label}</div>
               <div className="text-xs opacity-80">({item.count})</div>

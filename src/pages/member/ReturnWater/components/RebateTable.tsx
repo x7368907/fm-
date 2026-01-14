@@ -148,7 +148,7 @@ export default function RebateTable({
     {
       title: '管理',
       key: 'manager',
-      width: 100,
+      width: 120,
       render: () => (
         <Select defaultValue="待審核" size="small" className="w-full">
           <Option value="待審核">待審核</Option>

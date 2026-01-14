@@ -173,5 +173,28 @@ export const BONUS_DATA: BonusItem[] = [
   },
 ]
 
-// 為了符合型別，給一個空陣列或預設值
-export const MEMBER_DATA: MemberItem[] = []
+// ==========================================
+// 3. 新增頁面 Step3 (選擇會員) 使用的模擬資料
+// ==========================================
+export const MEMBER_DATA: MemberItem[] = Array.from({ length: 30 }).map(
+  (_, index) => {
+    const agent = AGENTS[Math.floor(Math.random() * AGENTS.length)]
+    const name = NAMES[Math.floor(Math.random() * NAMES.length)]
+
+    // 會員帳號（手機型）
+    const account = `09${Math.floor(Math.random() * 100000000)
+      .toString()
+      .padStart(8, '0')}`
+
+    return {
+      key: (index + 1).toString(),
+      level: agent.level,
+      agent: agent.name,
+      account,
+      name,
+      vip: PRIVILEGES[Math.floor(Math.random() * PRIVILEGES.length)],
+      status: Math.random() > 0.15 ? '啟用' : '停用',
+      balance: Math.floor(Math.random() * 50000), // 0 ~ 50,000
+    }
+  }
+)
