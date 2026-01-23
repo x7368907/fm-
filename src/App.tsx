@@ -29,14 +29,14 @@ import PrivilegeManagement from './pages/operations/Privilege/PrivilegeManagemen
 import AnnouncementManagement from './pages/operations/Announcement/AnnouncementManagement'
 // 特權管理-end
 // 財務管理-start
-// import ConsignmentManagement from './pages/financial/Consign/ConsignmentManagement'
-// import GameSubmissionManagement from './pages/financial/GameManagement/GameSubmissionManagement'
-// import GameSubmissionSettings from './pages/financial/GameSetting/GameSubmissionSettings'
-// import IntegratedReporting from './pages/financial/Integrated/IntegratedReporting'
-// import FlowManagement from './pages/financial/PayMentFlow/PaymentFlowManagement'
-// import GroupManagement from './pages/financial/PayMentGroup/PaymentGroupManagement'
-// import StoredManagement from './pages/financial/Stored/StoredManagement'
-// import TransactionStatisticsRecord from './pages/financial/Transaction/TransactionStatisticsRecord'
+import ConsignmentManagement from './pages/financial/Consign/ConsignmentManagement'
+import GameSubmissionManagement from './pages/financial/GameManagement/GameSubmissionManagement'
+import GameSubmissionSettings from './pages/financial/GameSetting/GameSubmissionSettings'
+import IntegratedReporting from './pages/financial/Integrated/IntegratedReporting'
+import FlowManagement from './pages/financial/PayMentFlow/PaymentFlowManagement'
+import GroupManagement from './pages/financial/PayMentGroup/PaymentGroupManagement'
+import StoredManagement from './pages/financial/Stored/StoredManagement'
+import TransactionStatisticsRecord from './pages/financial/Transaction/TransactionStatisticsRecord'
 // 財務管理-end
 // 遊戲商管理-start
 // import GameManagement from './pages/gameDealer/GameManagement/GameManagement'
@@ -92,7 +92,7 @@ export default function App() {
               <Route path="announce" element={<AnnouncementManagement />} />
             </Route>
             <Route path="financial">
-              {/* <Route path="integrate" element={<IntegratedReporting />} />
+              <Route path="integrate" element={<IntegratedReporting />} />
               <Route path="consignment" element={<ConsignmentManagement />} />
               <Route
                 path="gameSubmissionManagement"
@@ -108,10 +108,10 @@ export default function App() {
               <Route
                 path="transactionStatisticsRecord"
                 element={<TransactionStatisticsRecord />}
-              /> */}
+              />
             </Route>
-            <Route path="game">
-              {/* <Route path="gameManagement" element={<GameManagement />} />
+            {/* <Route path="game">
+              <Route path="gameManagement" element={<GameManagement />} />
               <Route
                 path="gameRedLimitSetting"
                 element={<GameRedLimitSetting />}
@@ -140,8 +140,8 @@ export default function App() {
               <Route
                 path="fishingBettingReport"
                 element={<FishingBettingReport />}
-              /> */}
-            </Route>
+              />
+            </Route> */}
           </Route>
         )}
       </Routes>
