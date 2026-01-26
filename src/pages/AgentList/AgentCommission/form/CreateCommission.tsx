@@ -60,7 +60,10 @@ export default function CreateCommission({
 
         <Form
           form={form}
-          layout="vertical"
+          layout="horizontal"
+          labelAlign="left"
+          labelCol={{ span: 3 }}
+          wrapperCol={{ span: 12, offset: 1 }}
           className="max-w-4xl"
           initialValues={{ system: 'share' }}
         >
@@ -73,11 +76,7 @@ export default function CreateCommission({
           </Form.Item>
 
           {/* 分潤名稱 */}
-          <Form.Item
-            label="分潤名稱"
-            name="name"
-            rules={[{ required: true, message: '請輸入分潤名稱' }]}
-          >
+          <Form.Item label="分潤名稱" name="name">
             <Input placeholder="請輸入" />
           </Form.Item>
 

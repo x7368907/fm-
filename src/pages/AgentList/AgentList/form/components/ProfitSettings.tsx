@@ -55,9 +55,7 @@ export default function ProfitSettings() {
       })
     }
   }, [agentSystem, isShareSystem, isWaterSystem, form])
-  useEffect(() => {
-    console.log('[Zustand] plans:', plans)
-  }, [plans])
+
   useEffect(() => {
     if (!selectedPlanKey) return
     if (!isShareSystem) return
