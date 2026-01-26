@@ -8,7 +8,7 @@ interface MemberTableProps {
   searchParams?: any
 }
 const themeConfig = { token: { colorPrimary: '#14b8a6' } }
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
+
 export default function MemberTable({ searchParams }: MemberTableProps) {
   // 原本 hook（完全不動）
   const {
@@ -42,6 +42,7 @@ export default function MemberTable({ searchParams }: MemberTableProps) {
 
   /** 滾動偵測 */
   const handleScroll = () => {
+    console.log(searchParams)
     const el = containerRef.current
     if (!el || loading || finished) return
 

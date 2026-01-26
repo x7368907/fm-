@@ -8,7 +8,7 @@ interface CompanyTableProps {
   searchParams?: any
 }
 const themeConfig = { token: { colorPrimary: '#14b8a6' } }
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
+
 export default function CompanyTable({ searchParams }: CompanyTableProps) {
   // 原本的 Hook（完全不動）
   const {
@@ -42,6 +42,7 @@ export default function CompanyTable({ searchParams }: CompanyTableProps) {
 
   /** 滾動偵測 */
   const handleScroll = () => {
+    console.log(searchParams)
     const el = containerRef.current
     if (!el || loading || finished) return
 

@@ -1,7 +1,7 @@
 import { Button, Select, Input, Form } from 'antd'
 import { SaveOutlined, CloseOutlined } from '@ant-design/icons'
+import { useEffect } from 'react'
 
-// 引入拆分後的模組
 import type { CommissionData } from '../types'
 import { useCommissionForm } from '../hooks/useCommissionForm'
 import RebateSettings from './components/RebateSettings'
@@ -17,14 +17,37 @@ export default function CreateCommission({
   onCancel,
   onSuccess,
 }: CreateCommissionProps) {
-  // 使用 Hook 處理表單邏輯
-  const { form, handleSubmit } = useCommissionForm({ initialValues, onSuccess })
+  const { form, handleSubmit } = useCommissionForm({
+    initialValues,
+    onSuccess,
+  })
 
   const title = initialValues ? '編輯分潤' : '新增分潤'
 
+  /** ✅ 監聽代理制度 */
+  const system = Form.useWatch('system', form)
+
+  const isShareMode = system === 'share'
+  const isRebateMode = system === 'rebate'
+
+  /** ✅ 切換制度時，自動清空不該存在的欄位 */
+  useEffect(() => {
+    if (isShareMode) {
+      form.setFieldsValue({
+        rebate: {},
+      })
+    }
+
+    if (isRebateMode) {
+      form.setFieldsValue({
+        ratio: undefined,
+      })
+    }
+  }, [isShareMode, isRebateMode, form])
+
   return (
     <div className="rounded-lg bg-white shadow-sm">
-      {/* 標題區塊 */}
+      {/* 標題 */}
       <div className="border-b border-gray-200 bg-gray-50 p-4">
         <h2 className="text-lg font-bold text-gray-800">{title}</h2>
       </div>
@@ -32,17 +55,24 @@ export default function CreateCommission({
       <div className="p-8">
         <div className="mb-6">
           <h3 className="text-base font-medium text-gray-700">分潤條件設定</h3>
-          <div className="mt-2 h-[1px] w-full bg-gray-200"></div>
+          <div className="mt-2 h-[1px] w-full bg-gray-200" />
         </div>
 
-        <Form form={form} layout="vertical" className="max-w-4xl">
-          <Form.Item label="代理制度" name="system" initialValue="share">
+        <Form
+          form={form}
+          layout="vertical"
+          className="max-w-4xl"
+          initialValues={{ system: 'share' }}
+        >
+          {/* 代理制度 */}
+          <Form.Item label="代理制度" name="system">
             <Select>
               <Select.Option value="share">佔成制</Select.Option>
-              <Select.Option value="rebate">反水制</Select.Option>
+              <Select.Option value="rebate">返水制</Select.Option>
             </Select>
           </Form.Item>
 
+          {/* 分潤名稱 */}
           <Form.Item
             label="分潤名稱"
             name="name"
@@ -51,11 +81,12 @@ export default function CreateCommission({
             <Input placeholder="請輸入" />
           </Form.Item>
 
+          {/* 代理級別 */}
           <Form.Item label="代理級別選擇" name="level">
             <Select
               placeholder="請選擇"
               options={[
-                { label: '任一層級', value: 'any' },
+                { label: '任一層級', value: 'all' },
                 { label: '1級總代理', value: '1' },
                 { label: '2級代理', value: '2' },
                 { label: '3級代理', value: '3' },
@@ -64,11 +95,13 @@ export default function CreateCommission({
               ]}
             />
           </Form.Item>
+
+          {/* 代理名稱 */}
           <Form.Item label="代理名稱選擇" name="agentName">
             <Select
               placeholder="請選擇"
               options={[
-                { label: '任一代理', value: 'any' },
+                { label: '任一代理', value: 'all' },
                 { label: 'FMCA(金流/成數代理-主站)', value: 'FMCA' },
                 { label: 'test123(測試帳號線)', value: 'test123' },
                 { label: 'XFW(金流/成數+返水代理-外單位)', value: 'XFW' },
@@ -77,13 +110,16 @@ export default function CreateCommission({
               ]}
             />
           </Form.Item>
+
+          {/* ✅ 代理佔成比例（返水制時禁用） */}
           <Form.Item label="代理佔成比例(%)" name="ratio">
-            <Input placeholder="請輸入" suffix="%" />
+            <Input placeholder="請輸入" suffix="%" disabled={isRebateMode} />
           </Form.Item>
 
-          {/* 模組化的反水設定區塊 */}
-          <RebateSettings />
+          {/* ✅ 代理返水條件（佔成制時禁用） */}
+          <RebateSettings disabled={isShareMode} />
 
+          {/* 結算方式 */}
           <Form.Item label="代理分潤結算" name="settlement">
             <Select placeholder="請選擇">
               <Select.Option value="week">週結(每週日-23:59:59)</Select.Option>
@@ -95,7 +131,7 @@ export default function CreateCommission({
         </Form>
       </div>
 
-      {/* 底部按鈕區 */}
+      {/* 底部按鈕 */}
       <div className="flex justify-center gap-4 border-t border-gray-200 bg-gray-50 p-4">
         <Button
           size="large"
@@ -105,6 +141,7 @@ export default function CreateCommission({
         >
           取消
         </Button>
+
         <Button
           type="primary"
           size="large"

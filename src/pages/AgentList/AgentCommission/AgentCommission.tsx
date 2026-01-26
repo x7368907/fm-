@@ -72,7 +72,9 @@ export default function AgentCommission() {
     setEditingRecord(record)
     setPage('form')
   }
-
+  const handleSearch = (record: CommissionData) => {
+    console.log(record)
+  }
   return (
     <ConfigProvider theme={themeConfig}>
       <div className="min-h-screen bg-gray-50 p-4">
@@ -102,7 +104,7 @@ export default function AgentCommission() {
               fields={searchFields}
               initialValues={initialValues} // 傳入預設值
               onCreate={handleCreate} // 傳入此屬性才會顯示新增按鈕
-              onSearch={fetchLogs}
+              onSearch={handleSearch}
             />
 
             <div className="rounded-lg bg-white p-4 shadow-sm">

@@ -68,7 +68,6 @@ const mockData: MemberDataType[] = [
   },
 ]
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 export default function MemberTable({ searchParams }: MemberTableProps) {
   // 1. 彈窗狀態管理
   const [modalState, setModalState] = useState({
@@ -202,6 +201,7 @@ export default function MemberTable({ searchParams }: MemberTableProps) {
   }
 
   const handleCloseModal = () => {
+    console.log(searchParams)
     setModalState((prev) => ({ ...prev, open: false }))
   }
 

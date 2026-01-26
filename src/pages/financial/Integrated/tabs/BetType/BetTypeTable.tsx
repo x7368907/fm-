@@ -7,7 +7,6 @@ interface BetTypeTableProps {
   searchParams?: any
 }
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 export default function BetTypeTable({ searchParams }: BetTypeTableProps) {
   // 原本 hook（不動）
   const {
@@ -64,6 +63,7 @@ export default function BetTypeTable({ searchParams }: BetTypeTableProps) {
 
       if (next.length >= dataSource.length) {
         setFinished(true)
+        console.log(searchParams)
       }
     }, 600)
   }

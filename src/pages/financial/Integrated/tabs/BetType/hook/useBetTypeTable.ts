@@ -15,7 +15,7 @@ export const useBetTypeTable = () => {
   })
 
   // 2. 【更新】點擊事件處理 (產生假資料並開啟彈窗)
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+
   const handleLinkClick = (title: string, record: BetTypeDataType) => {
     // 簡單判斷點擊的是哪個遊戲類別
     let gameType = '電子'
@@ -43,7 +43,7 @@ export const useBetTypeTable = () => {
         value: 0, // bettype-detail 模式主要看上面三個欄位
       })
     )
-
+    console.log(record)
     // 更新狀態，開啟彈窗
     setModalState({
       open: true,
