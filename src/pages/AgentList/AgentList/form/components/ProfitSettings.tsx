@@ -69,7 +69,7 @@ export default function ProfitSettings() {
       // 佔成比例
       profitRate: selectedPlan.shareRatio ?? 0,
 
-      // ⭐⭐⭐ 補這個：結算時機 ⭐⭐⭐
+      // 結算時機
       settlementTime:
         selectedPlan.settlement === '週結'
           ? 'weekly'
