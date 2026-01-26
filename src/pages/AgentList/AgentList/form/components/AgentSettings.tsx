@@ -4,7 +4,9 @@ const { TextArea } = Input
 interface AgentSettingsProps {
   isEditMode: boolean
 }
-
+const checkboxItemLayout = {
+  wrapperCol: { offset: 8, span: 14 },
+}
 export default function AgentSettings({ isEditMode }: AgentSettingsProps) {
   return (
     <Card title="代理設定" className="mb-4 shadow-sm">
@@ -12,7 +14,7 @@ export default function AgentSettings({ isEditMode }: AgentSettingsProps) {
       <Form
         layout="horizontal"
         labelAlign="left" // 強制標籤文字靠左
-        labelCol={{ span: 6 }} // 標籤寬度
+        labelCol={{ span: 8 }} // 標籤寬度
         wrapperCol={{ span: 14 }} // 欄位寬度
       >
         <Form.Item
@@ -54,7 +56,7 @@ export default function AgentSettings({ isEditMode }: AgentSettingsProps) {
           name="isNewLevel"
           valuePropName="checked"
           style={{ marginBottom: 24 }}
-          wrapperCol={{ offset: 6, span: 18 }}
+          {...checkboxItemLayout}
         >
           <Checkbox>新增代理級別</Checkbox>
         </Form.Item>

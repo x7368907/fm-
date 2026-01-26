@@ -103,7 +103,7 @@ export default function ProfitSettings() {
     })
   }, [selectedPlanKey, isWaterSystem, plans, form])
   const formItemLayout = {
-    labelCol: { span: 6 }, // 設定標籤寬度
+    labelCol: { span: 8 }, // 設定標籤寬度
     wrapperCol: { span: 14 }, // 設定欄位寬度
     labelAlign: 'left' as const, // 標籤靠左
     // [&>.ant-form-item-row] 代表選取這個元件直屬的子元素 .ant-form-item-row

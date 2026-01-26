@@ -7,7 +7,7 @@ export default function AgentInfo() {
       <Form
         layout="horizontal"
         labelAlign="left"
-        labelCol={{ span: 4 }} //標籤寬度
+        labelCol={{ span: 6 }} //標籤寬度
         wrapperCol={{ span: 12 }} // 欄位寬度
       >
         <Form.Item label="代理姓名" name="realName">
