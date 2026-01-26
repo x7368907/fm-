@@ -1,8 +1,8 @@
 import type { DataType } from './types'
 
 const MAX_LEVEL = 5
-const ROOT_COUNT = 3 // 1 級代理數量
-const CHILD_RANGE = [1, 3] // 每層最多子代理數
+const ROOT_COUNT = 3
+const CHILD_RANGE = [1, 3]
 
 const random = (min: number, max: number) =>
   Math.floor(Math.random() * (max - min + 1)) + min
@@ -10,13 +10,18 @@ const random = (min: number, max: number) =>
 const randomFrom = <T>(arr: T[]) => arr[Math.floor(Math.random() * arr.length)]
 
 let id = 1
-
 export const MOCK_DATA: DataType[] = []
 
 function createAgent(level: number, parentKey: string | null): DataType {
   const key = String(id++)
   const childCount =
     level < MAX_LEVEL ? random(CHILD_RANGE[0], CHILD_RANGE[1]) : 0
+
+  // ⭐ 先決定制度
+  const profitSystem = randomFrom<'佔成制' | '反水制'>(['佔成制', '反水制'])
+
+  // ⭐ 依制度決定數值
+  const isShare = profitSystem === '佔成制'
 
   return {
     key,
@@ -36,17 +41,21 @@ function createAgent(level: number, parentKey: string | null): DataType {
     registerTime: '2025/04/05 12:59:49',
     lastLoginTime: '2025/05/20 13:48:39',
 
-    profitSystem: randomFrom(['佔成制', '反水制']),
-    profitRate: randomFrom([90, 0.4]),
+    // ===== 分潤制度 =====
+    profitSystem,
 
-    liveRate: 0,
-    slotRate: 0,
-    sportRate: 0,
-    lotteryRate: 0,
-    chessRate: 0,
-    fishRate: 0,
+    // ⭐ 佔成制才有分潤比例
+    profitRate: isShare ? randomFrom([70, 80, 90]) : 0,
 
-    settlement: '週結',
+    // ⭐ 反水制才有返水比例
+    liveRate: isShare ? 0 : randomFrom([0.3, 0.4, 0.5]),
+    slotRate: isShare ? 0 : randomFrom([0.3, 0.4, 0.5]),
+    sportRate: isShare ? 0 : randomFrom([0.2, 0.3]),
+    lotteryRate: 0, // 通常彩票為 0
+    chessRate: isShare ? 0 : randomFrom([0.3, 0.4]),
+    fishRate: isShare ? 0 : randomFrom([0.3, 0.4]),
+
+    settlement: randomFrom(['週結', '月結']),
   }
 }
 

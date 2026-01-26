@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { Table, Spin } from 'antd'
+import { useCommissionStore } from '../../../../store/useCommissionStore'
 
 import { mockData } from '../utils/fakeData'
 import type { CommissionData } from '../types'
@@ -13,6 +14,8 @@ export default function CommissionTable({
   onLogs: (r: CommissionData) => void
 }) {
   const [list, setList] = useState<CommissionData[]>([])
+  const setPlans = useCommissionStore((s) => s.setPlans)
+
   const [limit, setLimit] = useState(20)
   const [loading, setLoading] = useState(false)
   const [finished, setFinished] = useState(false)
@@ -20,8 +23,12 @@ export default function CommissionTable({
 
   // ★ 初始 20 筆
   useEffect(() => {
-    setList(mockData.slice(0, 20))
-  }, [])
+    const firstPage = mockData.slice(0, 20)
+    setList(firstPage)
+
+    // ✅ 整筆資料存進 Zustand（不要 map）
+    setPlans(mockData)
+  }, [setPlans])
 
   // ★ 滾動事件
   const handleScroll = () => {
