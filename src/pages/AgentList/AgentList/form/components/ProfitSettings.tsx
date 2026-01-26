@@ -102,18 +102,21 @@ export default function ProfitSettings() {
             : undefined,
     })
   }, [selectedPlanKey, isWaterSystem, plans, form])
-
+  const formItemLayout = {
+    labelCol: { span: 6 }, // 設定標籤寬度
+    wrapperCol: { span: 14 }, // 設定欄位寬度
+    labelAlign: 'left' as const, // 標籤靠左
+    // [&>.ant-form-item-row] 代表選取這個元件直屬的子元素 .ant-form-item-row
+    className: '[&>.ant-form-item-row]:flex [&>.ant-form-item-row]:flex-row',
+  }
   return (
-    <Card
-      title="分潤條件設定"
-      className="mb-4 shadow-sm"
-      headStyle={{ background: '#fafafa' }}
-    >
+    <Card title="分潤條件設定" className="mb-4 shadow-sm">
       {/* 代理制度 */}
       <Form.Item
         label="代理制度"
         name="agentSystem"
         rules={[{ required: true, message: '請選擇代理制度' }]}
+        {...formItemLayout}
       >
         <Select placeholder="請選擇">
           <Select.Option value="share">佔成制</Select.Option>
@@ -126,6 +129,7 @@ export default function ProfitSettings() {
         label="分潤名稱"
         name="profitChoice"
         rules={[{ required: true, message: '請選擇分潤方案' }]}
+        {...formItemLayout}
       >
         <Select
           placeholder={agentSystem ? '請選擇分潤方案' : '請先選擇代理制度'}
@@ -140,12 +144,16 @@ export default function ProfitSettings() {
       </Form.Item>
 
       {/* 分潤比例（返水制時禁用） */}
-      <Form.Item label="分潤比例(%)" name="profitRate">
+      <Form.Item label="分潤比例(%)" name="profitRate" {...formItemLayout}>
         <Input placeholder="0" suffix="%" disabled={isWaterSystem} />
       </Form.Item>
 
       {/* 代理反水條件 */}
-      <Form.Item label="代理反水條件" style={{ marginBottom: 0 }}>
+      <Form.Item
+        label="代理反水條件"
+        style={{ marginBottom: 0 }}
+        {...formItemLayout}
+      >
         <div className="overflow-hidden rounded-md border text-center text-xs">
           {/* 表頭 */}
           <div className="grid grid-cols-6 bg-gray-200 py-2 font-bold">
@@ -210,8 +218,9 @@ export default function ProfitSettings() {
       <Form.Item
         label="分潤結算時機"
         name="settlementTime"
-        className="mt-4"
         rules={[{ required: true, message: '請選擇結算時機' }]}
+        {...formItemLayout}
+        className={`${formItemLayout.className ?? ''} mt-4`}
       >
         <Select placeholder="請選擇">
           <Select.Option value="weekly">週結(每週日-23:59:59)</Select.Option>
