@@ -22,7 +22,6 @@ export default function AgentCommission() {
 
   const { logs, open, setOpen, fetchLogs } = useCommissionLogs()
 
-  // ★ 1. 把你原本的欄位定義在這裡 (完全照搬你的選項)
   const searchFields: SearchField[] = [
     {
       label: '分潤比例(%)',
@@ -102,8 +101,8 @@ export default function AgentCommission() {
             {/* ★ 使用共用元件 */}
             <SearchPanel
               fields={searchFields}
-              initialValues={initialValues} // 傳入預設值
-              onCreate={handleCreate} // 傳入此屬性才會顯示新增按鈕
+              initialValues={initialValues}
+              onCreate={handleCreate}
               onSearch={handleSearch}
             />
 

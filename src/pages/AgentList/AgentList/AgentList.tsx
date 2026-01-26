@@ -10,16 +10,16 @@ import {
 } from 'antd'
 import { DownloadOutlined } from '@ant-design/icons'
 
-// 引入共用元件
+// 共用元件
 import SearchPanel, { type SearchField } from '../../../components/SearchPanel'
 import QuickRangePicker from '../../../components/QuickRangePicker'
 
-// 引入子元件
+// 子元件
 import AgentCreate from './form/AgentCreate'
 import HandlerModal from '../components/HandlerModal'
 import AgentTable from './components/AgentTable'
 
-// 引入 Hooks 與 Types
+// Hooks & Types
 import { useHandlerLogs } from './hooks/useHandlerLogs'
 import { useAgentHierarchy } from './hooks/useAgentHierarchy'
 import type { DataType } from './types'
@@ -27,22 +27,31 @@ import type { DataType } from './types'
 const theme = { token: { colorPrimary: '#14b8a6' } }
 
 export default function AgentList() {
-  // 視圖狀態：列表 | 新增 | 編輯
+  /** =========================
+   *  View 狀態
+   * ========================= */
   const [view, setView] = useState<'list' | 'create' | 'edit'>('list')
   const [editing, setEditing] = useState<DataType | null>(null)
 
-  // 經手人日誌 Hook
+  /** =========================
+   *  經手人日誌
+   * ========================= */
   const { logs, open, setOpen, fetchLogs } = useHandlerLogs()
 
-  // 代理層級與列表資料 Hook
-  const { agentList, cardTitle, searchByLevel, goNextLevel } =
-    useAgentHierarchy()
+  /** =========================
+   *  代理層級 Hook
+   * ========================= */
+  const {
+    agentList,
+    cardTitle,
+    searchByLevel,
+    goNextLevel,
+    // viewMode,
+  } = useAgentHierarchy()
 
-  /**
-   * =================================================
-   * 搜尋欄位設定 (Search Fields) - 完整未省略
-   * =================================================
-   */
+  /** =========================
+   *  搜尋欄位設定
+   * ========================= */
   const searchFields: SearchField[] = [
     {
       label: '代理級別',
@@ -144,12 +153,11 @@ export default function AgentList() {
     },
   ]
 
-  // 搜尋面板初始值
-  const initialValues = {
-    level: 'lvl1',
-  }
+  const initialValues = { level: 'lvl1' }
 
-  // 操作函式
+  /** =========================
+   *  操作事件
+   * ========================= */
   const handleCreate = () => {
     setEditing(null)
     setView('create')
@@ -177,31 +185,39 @@ export default function AgentList() {
   return (
     <ConfigProvider theme={theme}>
       <div className="min-h-screen bg-gray-50 p-4">
-        {/* 共用麵包屑區塊
-          在父層控制，確保切換 view 時位置不跳動
-        */}
-        <Breadcrumb separator=">" className="mb-4">
-          <Breadcrumb.Item>代理管理</Breadcrumb.Item>
-          <Breadcrumb.Item
-            className={
-              view !== 'list'
-                ? 'cursor-pointer transition-colors hover:text-teal-600'
-                : ''
-            }
-            onClick={() => setView('list')}
-          >
-            代理資料
-          </Breadcrumb.Item>
+        {/* ================= Breadcrumb（上層功能導覽） ================= */}
+        <Breadcrumb
+          className="mb-4"
+          separator=">"
+          items={[
+            {
+              title: '代理管理',
+            },
+            {
+              title: (
+                <span
+                  className={
+                    view !== 'list'
+                      ? 'cursor-pointer transition-colors hover:text-teal-600'
+                      : ''
+                  }
+                  onClick={() => setView('list')}
+                >
+                  代理資料
+                </span>
+              ),
+            },
+            ...(view !== 'list'
+              ? [
+                  {
+                    title: view === 'edit' ? '編輯代理' : '新增代理',
+                  },
+                ]
+              : []),
+          ]}
+        />
 
-          {/* 若非列表模式，動態顯示第三層 */}
-          {view !== 'list' && (
-            <Breadcrumb.Item>
-              {view === 'edit' ? '編輯代理' : '新增代理'}
-            </Breadcrumb.Item>
-          )}
-        </Breadcrumb>
-
-        {/* 內容切換區塊 */}
+        {/* ================= 列表模式 ================= */}
         {view === 'list' ? (
           <>
             <SearchPanel
@@ -230,10 +246,7 @@ export default function AgentList() {
             />
           </>
         ) : (
-          /* 新增/編輯模式
-            注意：AgentCreate.tsx 內部已經移除了外層 Container 與 Breadcrumb，
-            只保留 Form 內容，完美嵌入此處
-          */
+          /* ================= 新增 / 編輯模式 ================= */
           <AgentCreate
             initialValues={view === 'edit' ? editing : null}
             onCancel={() => setView('list')}
