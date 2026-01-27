@@ -24,7 +24,7 @@ const menuItems = [
       { key: 'agent/list', label: '代理資料', path: '/home/agent/list' },
       {
         key: 'agent/point',
-        label: '點數加扣點資料',
+        label: '點數加扣點紀錄',
         path: '/home/agent/point',
       },
       {
@@ -164,6 +164,53 @@ const menuItems = [
     key: 'game',
     label: '遊戲商管理',
     path: '/home/game',
+    children: [
+      {
+        key: 'game/gameManagement',
+        label: '遊戲管理',
+        path: '/home/game/gameManagement',
+      },
+      {
+        key: 'game/gameRedLimitSetting',
+        label: '遊戲限紅設定',
+        path: '/home/game/gameRedLimitSetting',
+      },
+      {
+        key: 'game/gameVendorRepairManagement',
+        label: '遊戲商維修管理',
+        path: '/home/game/gameVendorRepairManagement',
+      },
+      {
+        key: 'game/liveBettingReport',
+        label: '真人下注報表',
+        path: '/home/game/liveBettingReport',
+      },
+      {
+        key: 'game/electronicBettingReport',
+        label: '電子下注報表',
+        path: '/home/game/electronicBettingReport',
+      },
+      {
+        key: 'game/sportsBettingReport',
+        label: '體育下注報表',
+        path: '/home/game/sportsBettingReport',
+      },
+      {
+        key: 'game/lotteryBettingReport',
+        label: '彩票下注報表',
+        path: '/home/game/lotteryBettingReport',
+      },
+      {
+        key: 'game/cardGameBettingReport',
+        label: '棋牌下注報表',
+        path: '/home/game/cardGameBettingReport',
+      },
+      {
+        key: 'game/fishingBettingReport',
+        label: '捕魚下注報表',
+        path: '/home/game/fishingBettingReport',
+      },
+    ],
   },
   {
     key: 'admin',
