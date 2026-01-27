@@ -62,6 +62,8 @@ export const getColumns = ({
   {
     title: '代理分潤結算',
     dataIndex: 'profitCycles',
+    align: 'center',
+    width: 160,
     render: (items) => <ProfitCycleCell items={items} />,
   },
 
