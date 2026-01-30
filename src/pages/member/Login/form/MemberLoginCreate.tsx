@@ -17,35 +17,37 @@ export default function MemberLoginCreate({
   mode,
   initialValues,
 }: MemberLoginCreateProps) {
-  // 1. 使用 Hook 取得資料與操作函式
   const { ipData, deviceData, handleSave } = useLoginCreate(mode, initialValues)
 
   const pageTitle = mode === 'edit' ? '編輯黑名單' : '新增黑名單'
 
   return (
     <ConfigProvider theme={themeConfig}>
-      <div className="min-h-screen bg-gray-50 p-4">
+      <div className="space-y-4 bg-gray-50 p-4">
         {/* Breadcrumb */}
-        <div className="mb-4">
-          <Breadcrumb separator=">">
-            <Breadcrumb.Item>會員管理</Breadcrumb.Item>
-            <Breadcrumb.Item
-              onClick={onCancel}
-              className="cursor-pointer hover:text-teal-500"
-            >
-              會員登入管理
-            </Breadcrumb.Item>
-            <Breadcrumb.Item>{pageTitle}</Breadcrumb.Item>
-          </Breadcrumb>
-        </div>
+        <Breadcrumb separator=">" className="mb-2">
+          <Breadcrumb.Item>會員管理</Breadcrumb.Item>
+          <Breadcrumb.Item
+            onClick={onCancel}
+            className="cursor-pointer hover:text-teal-500"
+          >
+            會員登入管理
+          </Breadcrumb.Item>
+          <Breadcrumb.Item>{pageTitle}</Breadcrumb.Item>
+        </Breadcrumb>
 
-        <div className="mb-4 rounded-lg bg-white p-4 shadow-sm">
-          <h2 className="mb-4 text-lg font-bold text-gray-700">{pageTitle}</h2>
+        {/* ===== 外層卡片（sticky 以這層為基準） ===== */}
+        <div className="relative rounded-lg bg-white shadow-sm">
+          {/* Header */}
+          <div className="border-b border-gray-200 px-6 py-4">
+            <h2 className="text-lg font-bold text-gray-700">{pageTitle}</h2>
+          </div>
 
-          <div className="mb-6">
+          {/* ===== 內容區（一定要預留 footer 高度） ===== */}
+          <div className="p-6 pb-32">
             <h3 className="mb-4 font-bold text-gray-600">黑名單設定</h3>
 
-            {/* IP Blocklist Section */}
+            {/* IP Blocklist */}
             {ipData.length > 0 && (
               <>
                 <div className="mb-2">
@@ -53,7 +55,7 @@ export default function MemberLoginCreate({
                     type="primary"
                     ghost
                     size="small"
-                    className="mb-2 border-purple-300 bg-purple-50 font-bold text-purple-600 hover:bg-purple-100 hover:text-purple-700"
+                    className="border-purple-300 bg-purple-50 font-bold text-purple-600 hover:bg-purple-100"
                   >
                     IP重複黑名單 ({ipData.length})
                   </Button>
@@ -62,7 +64,7 @@ export default function MemberLoginCreate({
               </>
             )}
 
-            {/* Device Blocklist Section */}
+            {/* Device Blocklist */}
             {deviceData.length > 0 && (
               <>
                 <div className="mb-2">
@@ -70,7 +72,7 @@ export default function MemberLoginCreate({
                     type="primary"
                     ghost
                     size="small"
-                    className="mb-2 border-purple-300 bg-purple-50 font-bold text-purple-600 hover:bg-purple-100 hover:text-purple-700"
+                    className="border-purple-300 bg-purple-50 font-bold text-purple-600 hover:bg-purple-100"
                   >
                     裝置重複黑名單 ({deviceData.length})
                   </Button>
@@ -80,14 +82,13 @@ export default function MemberLoginCreate({
             )}
           </div>
 
-          {/* Footer Buttons */}
-          <div className="flex justify-center gap-4 border-t pb-2 pt-6">
+          {/* ===== Sticky Footer（統一樣式） ===== */}
+          <div className="sticky bottom-0 z-10 flex justify-center gap-4 border-t border-gray-200 bg-white py-4 shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.1)]">
             <Button
               size="large"
-              danger
               icon={<CloseOutlined />}
               onClick={onCancel}
-              className="w-32 font-bold"
+              className="h-10 w-32 border-red-500 font-bold text-red-500 hover:!border-red-400 hover:!text-red-400"
             >
               取消
             </Button>
@@ -95,7 +96,7 @@ export default function MemberLoginCreate({
               type="primary"
               size="large"
               icon={<SaveOutlined />}
-              className="w-32 border-none bg-green-500 font-bold hover:bg-green-600"
+              className="h-10 w-32 border-green-500 bg-green-500 font-bold hover:!bg-green-400"
               onClick={() => {
                 handleSave()
                 onCancel()

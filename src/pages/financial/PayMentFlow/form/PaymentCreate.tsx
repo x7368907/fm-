@@ -51,55 +51,60 @@ const PaymentCreate: React.FC<PaymentCreateProps> = ({
   }
 
   return (
-    <div className="min-h-screen bg-gray-100 px-4 pb-24">
-      {/* 麵包屑導航 */}
-      <Breadcrumb separator=">" style={{ padding: '16px' }}>
+    <div className="space-y-4 bg-gray-100 px-4">
+      {/* ===== Breadcrumb ===== */}
+      <Breadcrumb separator=">" className="px-4 py-4">
         <Breadcrumb.Item>財務管理</Breadcrumb.Item>
         <Breadcrumb.Item
           onClick={onCancel}
-          className="cursor-pointer transition-colors hover:text-teal-600"
+          className="cursor-pointer hover:text-teal-600"
         >
           金流串接管理
         </Breadcrumb.Item>
         <Breadcrumb.Item>{pageTitle}</Breadcrumb.Item>
       </Breadcrumb>
 
-      {/* 頂部標題 */}
-      <div className="mb-4 border-b border-gray-200 bg-white px-6 py-4 shadow-sm">
-        <div className="text-lg font-bold text-gray-800">{pageTitle}</div>
-      </div>
+      {/* ===== 外層卡片（sticky 以這層為基準） ===== */}
+      <div className="relative rounded-lg bg-white shadow-sm">
+        {/* Header */}
+        <div className="border-b border-gray-200 px-6 py-4">
+          <div className="text-lg font-bold text-gray-800">{pageTitle}</div>
+        </div>
 
-      {/* 表單區域 */}
-      <Form
-        form={form}
-        {...formItemLayout}
-        labelAlign="left"
-        className="w-full"
-      >
-        {/* 1. 基本設定區塊 */}
-        <PaymentBasicInfo />
+        {/* ===== 表單內容（一定要預留 footer 高度） ===== */}
+        <div className="p-6 pb-32">
+          <Form
+            form={form}
+            {...formItemLayout}
+            labelAlign="left"
+            className="w-full"
+          >
+            {/* 1. 基本設定區塊 */}
+            <PaymentBasicInfo />
 
-        {/* 2. 手續費設定區塊 (只有託售時顯示) */}
-        {category === 'withdraw' && <PaymentFeeSettings />}
-      </Form>
+            {/* 2. 手續費設定區塊 (只有託售時顯示) */}
+            {category === 'withdraw' && <PaymentFeeSettings />}
+          </Form>
+        </div>
 
-      {/* 底部固定按鈕 */}
-      <div className="fixed bottom-0 left-0 right-0 z-50 flex justify-center gap-4 border-t border-gray-200 bg-white py-3 shadow-[0_-2px_10px_rgba(0,0,0,0.05)]">
-        <Button
-          icon={<CloseOutlined />}
-          onClick={onCancel}
-          className="h-10 w-32 border-red-500 font-bold text-red-500 hover:!border-red-400 hover:bg-red-50 hover:!text-red-400"
-        >
-          取 消
-        </Button>
-        <Button
-          type="primary"
-          icon={<SaveOutlined />}
-          onClick={handleSubmit}
-          className="h-10 w-32 border-green-500 bg-green-500 font-bold shadow-sm hover:!border-green-400 hover:!bg-green-400"
-        >
-          儲 存
-        </Button>
+        {/* ===== Sticky Footer（統一樣式） ===== */}
+        <div className="sticky bottom-0 z-10 flex justify-center gap-4 border-t border-gray-200 bg-white py-4 shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.1)]">
+          <Button
+            icon={<CloseOutlined />}
+            onClick={onCancel}
+            className="h-10 w-32 border-red-500 font-bold text-red-500 hover:!border-red-400 hover:bg-red-50 hover:!text-red-400"
+          >
+            取 消
+          </Button>
+          <Button
+            type="primary"
+            icon={<SaveOutlined />}
+            onClick={handleSubmit}
+            className="h-10 w-32 border-green-500 bg-green-500 font-bold shadow-sm hover:!border-green-400 hover:!bg-green-400"
+          >
+            儲 存
+          </Button>
+        </div>
       </div>
     </div>
   )

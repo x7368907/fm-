@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { Form, Input, Checkbox, Button, Breadcrumb, Card, Row, Col } from 'antd'
 import type { CheckboxChangeEvent } from 'antd/es/checkbox'
-import { SaveOutlined, CloseOutlined } from '@ant-design/icons' // ★ 引入 Icon
+import { SaveOutlined, CloseOutlined } from '@ant-design/icons'
 
 /**
  * 定義選項資料結構
@@ -178,13 +178,12 @@ export default function PaymentGroupCreate({ onCancel, onSave }: Props) {
   const [form] = Form.useForm()
 
   return (
-    // ★ 1. 加入 pb-24 確保底部內容不被固定按鈕列遮擋
-    <div className="min-h-screen bg-gray-50 p-4 pb-24">
-      {/* 麵包屑 */}
+    <div className="space-y-4 bg-gray-50 p-4">
+      {/* Breadcrumb */}
       <Breadcrumb separator=">" className="mb-4">
         <Breadcrumb.Item>財務管理</Breadcrumb.Item>
         <Breadcrumb.Item
-          className="cursor-pointer transition-colors hover:text-teal-600"
+          className="cursor-pointer hover:text-teal-600"
           onClick={onCancel}
         >
           金流群組管理
@@ -192,86 +191,89 @@ export default function PaymentGroupCreate({ onCancel, onSave }: Props) {
         <Breadcrumb.Item>新增金流群組</Breadcrumb.Item>
       </Breadcrumb>
 
+      {/* ===== 外層 Card（sticky 以這層為基準） ===== */}
       <Card
         title={<span className="font-bold text-gray-700">新增金流群組</span>}
-        className="shadow-sm"
+        className="relative shadow-sm"
         bodyStyle={{ padding: 0 }}
       >
-        <Form
-          form={form}
-          layout="vertical"
-          className="p-6"
-          initialValues={{ groupId: '', groupName: '' }}
-        >
-          {/* 基本設定 */}
-          <div className="mb-6">
-            <h3 className="mb-4 border-l-4 border-teal-500 pl-2 font-bold text-gray-700">
-              金流群組設定
-            </h3>
-            <div className="ml-2 max-w-2xl space-y-4">
-              <Form.Item label="群組編號" name="groupId" className="mb-0">
-                <Input placeholder="請輸入" />
-              </Form.Item>
-              <Form.Item label="群組名稱" name="groupName" className="mb-0">
-                <Input placeholder="請輸入" />
-              </Form.Item>
+        {/* ===== 表單內容（預留 footer 高度） ===== */}
+        <div className="p-6 pb-32">
+          <Form
+            form={form}
+            layout="vertical"
+            initialValues={{ groupId: '', groupName: '' }}
+          >
+            {/* 基本設定 */}
+            <div className="mb-6">
+              <h3 className="mb-4 border-l-4 border-teal-500 pl-2 font-bold text-gray-700">
+                金流群組設定
+              </h3>
+              <div className="ml-2 max-w-2xl space-y-4">
+                <Form.Item label="群組編號" name="groupId" className="mb-0">
+                  <Input placeholder="請輸入" />
+                </Form.Item>
+                <Form.Item label="群組名稱" name="groupName" className="mb-0">
+                  <Input placeholder="請輸入" />
+                </Form.Item>
+              </div>
             </div>
-          </div>
 
-          {/* 出款設定 */}
-          <div className="mb-6">
-            <h3 className="mb-2 text-sm text-gray-600">
-              出款 - 金流類型 / 名稱選擇
-            </h3>
-            <div className="rounded border border-gray-200">
-              {WITHDRAW_OPTIONS.map((item) => (
-                <PaymentSelectionRow
-                  key={item.key}
-                  name={`withdraw_${item.key}`}
-                  categoryLabel={item.label}
-                  options={item.options}
-                />
-              ))}
+            {/* 出款設定 */}
+            <div className="mb-6">
+              <h3 className="mb-2 text-sm text-gray-600">
+                出款 - 金流類型 / 名稱選擇
+              </h3>
+              <div className="rounded border border-gray-200">
+                {WITHDRAW_OPTIONS.map((item) => (
+                  <PaymentSelectionRow
+                    key={item.key}
+                    name={`withdraw_${item.key}`}
+                    categoryLabel={item.label}
+                    options={item.options}
+                  />
+                ))}
+              </div>
             </div>
-          </div>
 
-          {/* 入款設定 */}
-          <div className="mb-2">
-            <h3 className="mb-2 text-sm text-gray-600">
-              入款 - 金流類型 / 名稱選擇
-            </h3>
-            <div className="rounded border border-gray-200">
-              {DEPOSIT_OPTIONS.map((item) => (
-                <PaymentSelectionRow
-                  key={item.key}
-                  name={`deposit_${item.key}`}
-                  categoryLabel={item.label}
-                  options={item.options}
-                />
-              ))}
+            {/* 入款設定 */}
+            <div className="mb-2">
+              <h3 className="mb-2 text-sm text-gray-600">
+                入款 - 金流類型 / 名稱選擇
+              </h3>
+              <div className="rounded border border-gray-200">
+                {DEPOSIT_OPTIONS.map((item) => (
+                  <PaymentSelectionRow
+                    key={item.key}
+                    name={`deposit_${item.key}`}
+                    categoryLabel={item.label}
+                    options={item.options}
+                  />
+                ))}
+              </div>
             </div>
-          </div>
-        </Form>
+          </Form>
+        </div>
+
+        {/* ===== Sticky Footer（統一樣式） ===== */}
+        <div className="sticky bottom-0 z-10 flex justify-center gap-4 border-t border-gray-200 bg-white py-4 shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.1)]">
+          <Button
+            icon={<CloseOutlined />}
+            onClick={onCancel}
+            className="h-10 w-32 border-red-500 font-bold text-red-500 hover:!border-red-400 hover:bg-red-50 hover:!text-red-400"
+          >
+            取 消
+          </Button>
+          <Button
+            type="primary"
+            icon={<SaveOutlined />}
+            onClick={onSave}
+            className="h-10 w-32 border-green-500 bg-green-500 font-bold shadow-sm hover:!border-green-400 hover:!bg-green-400"
+          >
+            儲 存
+          </Button>
+        </div>
       </Card>
-
-      {/* ★ 2. 底部固定按鈕列 (與您提供的參考樣式一致) */}
-      <div className="fixed bottom-0 left-0 right-0 z-50 flex justify-center gap-4 border-t border-gray-200 bg-white py-3 shadow-[0_-2px_10px_rgba(0,0,0,0.05)]">
-        <Button
-          icon={<CloseOutlined />}
-          onClick={onCancel}
-          className="h-10 w-32 border-red-500 font-bold text-red-500 hover:!border-red-400 hover:bg-red-50 hover:!text-red-400"
-        >
-          取 消
-        </Button>
-        <Button
-          type="primary"
-          icon={<SaveOutlined />}
-          onClick={onSave}
-          className="h-10 w-32 border-green-500 bg-green-500 font-bold shadow-sm hover:!border-green-400 hover:!bg-green-400"
-        >
-          儲 存
-        </Button>
-      </div>
     </div>
   )
 }

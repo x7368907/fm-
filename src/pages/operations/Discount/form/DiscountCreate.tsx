@@ -22,7 +22,6 @@ export default function DiscountCreate({
   onSave,
   initialValues,
 }: DiscountCreateProps) {
-  // 使用 Hook
   const {
     form,
     discountType,
@@ -31,7 +30,6 @@ export default function DiscountCreate({
     handleValuesChange,
   } = useDiscountForm(initialValues)
 
-  // 按鈕樣式 Helper
   const getTypeBtnClass = (type: string) => {
     const base =
       'px-8 py-1 rounded border text-sm transition-colors cursor-pointer outline-none'
@@ -40,13 +38,11 @@ export default function DiscountCreate({
       : `${base} bg-white text-gray-500 border-gray-300 hover:text-[#7e22ce] hover:border-[#7e22ce]`
   }
 
-  // ★ 核心：根據類型渲染對應的表單內容
   const renderFormContent = () => {
     switch (discountType) {
       case 'privilege':
         return <PrivilegeForm />
       case 'discount':
-        // 傳遞需要的 props
         return <DiscountForm isCheckAmountUnlimited={isCheckAmountUnlimited} />
       case 'redenv':
         return <RedEnvForm />
@@ -56,8 +52,9 @@ export default function DiscountCreate({
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 p-6">
-      <Breadcrumb separator=">" className="mb-4">
+    <div className="space-y-4 bg-gray-50 p-6">
+      {/* Breadcrumb */}
+      <Breadcrumb separator=">" className="mb-2">
         <Breadcrumb.Item>營運管理</Breadcrumb.Item>
         <Breadcrumb.Item
           onClick={onCancel}
@@ -70,14 +67,17 @@ export default function DiscountCreate({
         </Breadcrumb.Item>
       </Breadcrumb>
 
-      <div className="rounded-lg border border-gray-200 bg-white shadow-sm">
+      {/* ===== 外層卡片（sticky 以這層為基準） ===== */}
+      <div className="relative rounded-lg bg-white shadow-sm">
+        {/* Header */}
         <div className="border-b border-gray-100 px-6 py-4">
           <h2 className="text-base font-bold text-gray-800">
             {initialValues ? '編輯優惠' : '新增優惠'}
           </h2>
         </div>
 
-        <div className="p-8">
+        {/* ===== 表單內容（一定要預留 footer 高度） ===== */}
+        <div className="p-8 pb-32">
           <Form
             form={form}
             layout="horizontal"
@@ -87,8 +87,8 @@ export default function DiscountCreate({
             className="w-full"
             onValuesChange={handleValuesChange}
           >
-            {/* 1. 類型切換區 */}
             <div className="mb-4 text-sm font-bold text-gray-700">優惠設定</div>
+
             <Space size="middle" className="mb-4">
               {[
                 { key: 'privilege', label: '特權' },
@@ -108,30 +108,30 @@ export default function DiscountCreate({
 
             <div className="my-6 border-t border-gray-100" />
 
-            {/* 2. 動態表單區 (只渲染當前選中的類型) */}
             {renderFormContent()}
 
-            {/* 3. 共用欄位區 (放在最後或最前皆可) */}
             <CommonFields />
           </Form>
         </div>
 
-        {/* 底部按鈕 */}
-        <div className="flex justify-center gap-4 rounded-b-lg border-t border-gray-100 bg-gray-50 py-6">
+        {/* ===== Sticky Footer（統一樣式） ===== */}
+        <div className="sticky bottom-0 z-10 flex justify-center gap-4 border-t border-gray-200 bg-white py-4 shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.1)]">
           <Button
+            icon={<CloseOutlined />}
             size="large"
             onClick={onCancel}
-            className="w-32 border-red-500 text-red-500 hover:border-red-600 hover:text-red-600"
+            className="h-10 w-32 border-red-500 font-bold text-red-500 hover:!border-red-400 hover:!text-red-400"
           >
-            <CloseOutlined /> 取消
+            取消
           </Button>
           <Button
             type="primary"
+            icon={<SaveOutlined />}
             size="large"
             onClick={onSave}
-            className="w-32 border-green-500 bg-green-500 hover:bg-green-600"
+            className="h-10 w-32 border-green-500 bg-green-500 font-bold hover:!bg-green-400"
           >
-            <SaveOutlined /> 儲存
+            儲存
           </Button>
         </div>
       </div>
