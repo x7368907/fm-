@@ -41,19 +41,19 @@ import TransactionStatisticsRecord from './pages/financial/Transaction/Transacti
 // 遊戲商管理-start
 import GameManagement from './pages/gameDealer/GameManagement/GameManagement'
 import GameRedLimitSetting from './pages/gameDealer/GameRedLimit/GameRedLimitSetting'
-// import GameVendorRepairManagement from './pages/gameDealer/GameVendorRepair/GameVendorRepairManagement'
-// import LiveBettingReport from './pages/gameDealer/LiveBettingReport/LiveBettingReport'
-// import ElectronicBettingReport from './pages/gameDealer/ElectronicBettingReport/ElectronicBettingReport'
-// import SportsBettingReport from './pages/gameDealer/SportsBettingReport/SportsBettingReport'
-// import LotteryBettingReport from './pages/gameDealer/LotteryBettingReport/LotteryBettingReport'
-// import CardGameBettingReport from './pages/gameDealer/CardGameBettingReport/CardGameBettingReport'
-// import FishingBettingReport from './pages/gameDealer/FishingBettingReport/FishingBettingReport'
+import GameVendorRepairManagement from './pages/gameDealer/GameVendorRepair/GameVendorRepairManagement'
+import LiveBettingReport from './pages/gameDealer/LiveBettingReport/LiveBettingReport'
+import ElectronicBettingReport from './pages/gameDealer/ElectronicBettingReport/ElectronicBettingReport'
+import SportsBettingReport from './pages/gameDealer/SportsBettingReport/SportsBettingReport'
+import LotteryBettingReport from './pages/gameDealer/LotteryBettingReport/LotteryBettingReport'
+import CardGameBettingReport from './pages/gameDealer/CardGameBettingReport/CardGameBettingReport'
+import FishingBettingReport from './pages/gameDealer/FishingBettingReport/FishingBettingReport'
 // 遊戲商管理-end
 // 後台管理-start
 // import WebsiteManagement from './pages/admin/WebsiteManagement'
 // import AdminGroupManagement from './pages/admin/GroupManagement/GroupManagement'
 // import PeopleManagement from './pages/admin/PeopleManagement/PeopleManagement'
-// import InternalMessagingManagement from './pages/admin/InternalMessagingManagement'
+// import InternalMessagingManagement from './pages/admin/InternalMessagingManagement/InternalMessagingManagement'
 // 後台管理-end
 export default function App() {
   const isLoggedIn = useAuthStore((state) => state.isLoggedIn)
@@ -122,7 +122,7 @@ export default function App() {
                 path="gameRedLimitSetting"
                 element={<GameRedLimitSetting />}
               />
-              {/* <Route
+              <Route
                 path="gameVendorRepairManagement"
                 element={<GameVendorRepairManagement />}
               />
@@ -146,10 +146,10 @@ export default function App() {
               <Route
                 path="fishingBettingReport"
                 element={<FishingBettingReport />}
-              /> */}
+              />
             </Route>
-            {/* <Route path="admin">
-              <Route path="websiteManagement" element={<WebsiteManagement />} />
+            <Route path="admin">
+              {/* <Route path="websiteManagement" element={<WebsiteManagement />} />
               <Route
                 path="groupManagement"
                 element={<AdminGroupManagement />}
@@ -158,8 +158,8 @@ export default function App() {
               <Route
                 path="internalMessagingManagement"
                 element={<InternalMessagingManagement />}
-              />
-            </Route> */}
+              /> */}
+            </Route>
           </Route>
         )}
       </Routes>
