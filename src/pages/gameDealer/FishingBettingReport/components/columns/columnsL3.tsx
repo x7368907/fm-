@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 // components/columns/columnsL3.ts
 import { Image, Tag } from 'antd'
 import type { ColumnsType } from 'antd/es/table'
@@ -40,9 +39,12 @@ export const getColumnsL3 = ({
         align: 'center',
         width: 150,
         render: (t) => (
-          <span className="whitespace-pre-wrap text-[11px] leading-tight">
-            {t}
-          </span>
+          console.log(onViewDetail),
+          (
+            <span className="whitespace-pre-wrap text-[11px] leading-tight">
+              {t}
+            </span>
+          )
         ),
       },
       {
