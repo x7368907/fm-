@@ -216,6 +216,28 @@ const menuItems = [
     key: 'admin',
     label: '後台管理',
     path: '/home/admin',
+    children: [
+      {
+        key: 'admin/websiteManagement',
+        label: '網站設定',
+        path: '/home/admin/websiteManagement',
+      },
+      {
+        key: 'admin/groupManagement',
+        label: '群組管理',
+        path: '/home/admin/groupManagement',
+      },
+      {
+        key: 'admin/peopleManagement',
+        label: '人員管理',
+        path: '/home/admin/peopleManagement',
+      },
+      {
+        key: 'admin/internalMessagingManagement',
+        label: '站內信管理',
+        path: '/home/admin/internalMessagingManagement',
+      },
+    ],
   },
 ]
 

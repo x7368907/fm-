@@ -50,10 +50,10 @@ import CardGameBettingReport from './pages/gameDealer/CardGameBettingReport/Card
 import FishingBettingReport from './pages/gameDealer/FishingBettingReport/FishingBettingReport'
 // 遊戲商管理-end
 // 後台管理-start
-// import WebsiteManagement from './pages/admin/WebsiteManagement'
-// import AdminGroupManagement from './pages/admin/GroupManagement/GroupManagement'
-// import PeopleManagement from './pages/admin/PeopleManagement/PeopleManagement'
-// import InternalMessagingManagement from './pages/admin/InternalMessagingManagement/InternalMessagingManagement'
+import WebsiteManagement from './pages/admin/WebsiteManagement'
+import AdminGroupManagement from './pages/admin/GroupManagement/GroupManagement'
+import PeopleManagement from './pages/admin/PeopleManagement/PeopleManagement'
+import InternalMessagingManagement from './pages/admin/InternalMessagingManagement/InternalMessagingManagement'
 // 後台管理-end
 export default function App() {
   const isLoggedIn = useAuthStore((state) => state.isLoggedIn)
@@ -149,7 +149,7 @@ export default function App() {
               />
             </Route>
             <Route path="admin">
-              {/* <Route path="websiteManagement" element={<WebsiteManagement />} />
+              <Route path="websiteManagement" element={<WebsiteManagement />} />
               <Route
                 path="groupManagement"
                 element={<AdminGroupManagement />}
@@ -158,7 +158,7 @@ export default function App() {
               <Route
                 path="internalMessagingManagement"
                 element={<InternalMessagingManagement />}
-              /> */}
+              />
             </Route>
           </Route>
         )}
